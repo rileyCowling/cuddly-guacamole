@@ -2,6 +2,8 @@
 *   ECE 513 IOT Project
 */
 
+//this is to test github
+
 //Inclusion of library header files
 #include <Wire.h>
 #include "MAX30105.h"
@@ -72,7 +74,8 @@ void loop(){
     digitalWrite(G_LED,LOW);
     digitalWrite(B_LED, LOW);
     Serial.println(" No finger?");
-
+    
+    //we dont want to take unnecessary data
     //while there is no finger flash red LED
     while(fingerPresent==0){ 
       digitalWrite(R_LED,HIGH);
