@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+    font-family: arial, sans-serif;
+}
+
+/*general styling section*/
+body {
+    min-width: 300px;
+    min-height: 500px;
+    overflow-y: auto;
+    width:98vw;
+    height: 98vh;
+    position: relative;
+    background-color: #32a897;
+    margin:0px;
+    padding:0px;
+}
+
+#containerContent {
+    height: fit-content;
+    min-height: 400px;
+    width:98vw;
+    margin-left:auto;
+    margin-right: auto;
+    position: relative;
+    margin-top: 100px;
+    padding: 0px;
+    display: block;
+    margin-bottom: 40px;
+    overflow: auto;
+    text-align: center;
+}
+  
+/*top banner styling section*/
+#banner {
+    color:gray;
+    height: 100px;
+    width: 100%;
+    background: whitesmoke;
+    box-shadow: 0px 1px 1px whitesmoke;
+    position: fixed;
+    top:0;
+    margin-top:0px;
+    z-index: 0;
+}
+
+#banner #header {
+	float: left;
+	width: 50%;
+	height: 100%;
+	font-size: 1.75vw;
+	padding-bottom: 50px;
+	padding-top: 1vh;
+}
+
+#banner #links {
+	float: right;
+    width:50%;
+    height: 100%;
+	font-size: 1.25vw;
+	padding-top: 2.5vh;
+}
+
+#banner a {
+    text-decoration: none;
+    color:gray;
+}
+
+#banner a:hover {
+	color: #32a897
+}
+
+/*#banner h1 {
+    display: inline-block;
+    width:40%;
+    height: 100%;
+    padding-left: 10px;
+	font-size: 2.5vw;
+}*/
+
+/*main content styling section*/
+#about {
+    display: inline-block;
+    width:29%;
+    min-width:200px;
+    vertical-align: top;
+    margin:auto;
+    margin-bottom: 20px;
+    text-align: left;
+}
+  
+#about p {
+    margin:20px auto;
+    width:90%;
+    height: fit-content;
+    color: black;
+    text-shadow: none;
+    font-size: 20px;
+}
+ 
+/*member styling section*/
+#memberList {
+    margin-top:20px;
+    margin-left:5px;
+    display: inline-block;
+    background-color: #c8d8e4 ;
+    color:#32a897;
+    text-shadow: 1px 1px darkgray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px black;
+    width:70%;
+    min-width: 200px;
+    height: 60vh;
+    min-height: 100%;
+    max-height: 1200px;
+    padding: 10px;
+    text-align: center;
+    overflow: auto;
+    margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.member {
+    color:whitesmoke;
+    text-shadow: 1px 1px darkgray;
+    display:inline-block;
+    vertical-align: top;
+    width: 25%;
+    min-width: 100px;
+    height: fit-content;
+    max-height: 200px;
+    min-height: 250px;
+    padding:5px;
+    margin:5px 2%;
+    border:1px inset gray;
+    background-color: gray;
+    border-radius: 4px;
+    box-shadow: 4px 4px 4px 2px black;
+    overflow: hidden;
+}
+
+.member:hover {
+    transform: translate(-1%,-1%);
+    max-height: fit-content;
+}
+
+#teamMember {
+    width:100%;
+    height: fit-content;
+    margin:0px auto;
+}
+
+.member img {
+    border-radius: 400px;
+    height: 150px;
+    width: auto;
+    margin:auto;
+    display: block;
+    box-shadow: 2px 2px 2px black;
+}
+
+.member h2 {
+    font-size: 20px;
+    height: fit-content;
+}
+
+.member p {
+    font-size: 16px;
+    overflow-wrap: break-word;
+}
+
+.member a {
+    color:whitesmoke;
+}
