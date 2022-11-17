@@ -1,4 +1,6 @@
-//Loggin into EC2 Instance from Terminal
+///////////////////////////////////////////////
+    Loggin into EC2 Instance from Terminal
+///////////////////////////////////////////////
 
 $ chmod 400 513_project_key.pem
 
@@ -25,7 +27,7 @@ http://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000
       Git Hub
 //////////////////
 
-Update to the latest version in repository
+//Updating to the latest version in repository
 
 $ ssh -i "513_project_key.pem" ec2-user@ec2-13-57-240-26.us-west-1.compute.amazonaws.com
 
