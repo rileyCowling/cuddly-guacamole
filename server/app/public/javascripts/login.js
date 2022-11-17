@@ -4,7 +4,7 @@ function login() {
         email: $('#email').val(),
         password: $('#password').val()
     };
-
+    
     $.ajax({
         url: '/customers/logIn',
         method: 'POST',
