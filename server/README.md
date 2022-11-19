@@ -3,6 +3,7 @@
 ///////////////////////////////////////////////
 
 //Run the following commands to log onto our EC2 instance
+
 $ chmod 400 513_project_key.pem
 
 $ ssh -i "513_project_key.pem" ec2-user@ec2-13-57-240-26.us-west-1.compute.amazonaws.com
