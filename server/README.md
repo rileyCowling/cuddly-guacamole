@@ -2,6 +2,7 @@
     Loggin into EC2 Instance from Terminal
 ///////////////////////////////////////////////
 
+//Run the following commands to log onto our EC2 instance
 $ chmod 400 513_project_key.pem
 
 $ ssh -i "513_project_key.pem" ec2-user@ec2-13-57-240-26.us-west-1.compute.amazonaws.com
@@ -31,8 +32,11 @@ http://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000
 
 $ ssh -i "513_project_key.pem" ec2-user@ec2-13-57-240-26.us-west-1.compute.amazonaws.com
 
-$ cd cuddly-guacamole/
+$ cd cuddly-guacamole/      //need to be inside of the git repo
 
-$ git pull
+$ git pull                  //this updates from the online repo
+//we shouldn't have to work on the code in the EC2 instance so we won't be pushing from there
 
+//Usefull git commands
 
+$ git status //tells you if you're working with an up to date project
