@@ -66,4 +66,4 @@ app.use(function(err, req, res, next) {
 app.listen(3000);
 module.exports = app;
 
-
+console.log("Here's the Link! http://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000/");
