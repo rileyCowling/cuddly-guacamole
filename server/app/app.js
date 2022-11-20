@@ -66,4 +66,4 @@ app.use(function(err, req, res, next) {
 app.listen(3000);
 module.exports = app;
 
-console.log("Here's the Link! http://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000/");
+console.log("\n\t\t\t**** Welcome ****\n\nHere's the Link if you're running this with EC2: http://13.57.240.26:3000 \n\nIf you're using a local host: http://localhost:3000");
