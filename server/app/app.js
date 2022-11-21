@@ -1,13 +1,16 @@
-//This is a test of updating through github
+////  This is the app.js file you run with $ node app.js  ////
+////  If you want it to continuously update the websit while working in vs code use $ npm run devStart and goto http://localhost:3000
 
+//Express Generated
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 const bodyParser = require('body-parser');     // Parses JSON in body
 
+/********* Important **********/
+//Needed for adding routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test');
@@ -42,10 +45,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+/********* Important **********/
+//Needed for adding routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/test", testRouter);
 
+
+
+//Express Generated
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -63,7 +73,8 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(3000);
+app.listen(3000); // Port 3000
 module.exports = app;
 
+// Welcome message displayed on console
 console.log("\n\t\t\t**** Welcome ****\n\nHere's the Link if you're running this with EC2: http://13.57.240.26:3000 \n\nIf you're using a local host: http://localhost:3000\n\n");
