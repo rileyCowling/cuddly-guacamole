@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////
 
 //Run the following commands to log onto our EC2 instance
-// I think you can copy the key and just make sure you are located in the right directory
+//copy/download key to your computer and make sure you are located in the right directory
 
 $ chmod 400 513_project_key.pem
 

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/data',function(req,res){
-  let msgStr = `HB = (${req.body.heartBeat})`;
+  let msgStr = 'Heart rate is ${req.body.heartBeat} BPM';
   res.status(201).json({message: msgStr});
   console.log(msgStr);
 });
