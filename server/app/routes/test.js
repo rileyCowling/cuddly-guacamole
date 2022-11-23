@@ -16,7 +16,7 @@ router.post('/entry',function(req,res){
     name: req.body.name,
     age: req.body.age,
   });
-  newStudent.save(function (err, student) {
+  newUser.save(function (err, user) {
     if (err) {
       res.status(400).send(err);
     }
