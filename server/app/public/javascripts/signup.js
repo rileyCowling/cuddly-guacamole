@@ -26,6 +26,11 @@ function signup() {
         alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
         return false;
     }
+    
+    let txdata = {
+        email: $('#email').val(),
+        password: $('#password').val()
+    };
 
     //send info to server (direct copy, havent tested yet)
     $.ajax({
