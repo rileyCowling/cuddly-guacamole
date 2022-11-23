@@ -35,7 +35,7 @@ router.post('/logIn',function (req,res) { //expecting to recieve an email and pa
 });
 
 router.post('/dataEntry', function (req,res) { //expecting a heart rate and a spo2 percentage
-  let msgStr = `your data has been recieved: HR = (${req.body.heartRate}) and SPO2 = (${req.body.spo2})%`;
+  let msgStr = `your data has been recieved: HR = (${req.body.data}) and SPO2 = (${req.body.spo2})%`;
   res.status(201).json({ message: msgStr });
   console.log(msgStr);
 
