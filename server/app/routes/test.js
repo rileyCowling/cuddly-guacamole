@@ -28,4 +28,11 @@ router.post('/signUp',function(req,res){
   });
 });
 
+router.post('/logIn',function (req,res) {
+  let msgStr = `your login request has been recieved for (${req.body.email})`;
+  res.status(201).json({ message: msgStr });
+  console.log(msgStr);
+
+});
+
 module.exports = router;

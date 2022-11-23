@@ -6,7 +6,7 @@ function login() {
     };
     
     $.ajax({
-        url: '/customers/logIn',
+        url: '/test/logIn',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(txdata),
@@ -14,7 +14,7 @@ function login() {
     })
     .done(function (data, textStatus, jqXHR) {
         localStorage.setItem("token", data.token);
-        window.location.replace("device.html");
+        window.location.replace("account.html");
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         $('#rxData').html(JSON.stringify(jqXHR, null, 2));

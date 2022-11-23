@@ -8,7 +8,7 @@ function signup() {
         window.alert("Invalid Password");
         return;
     }
-    
+
     //** DO NOT DELETE **/
     /*** Complexity not necessary for testing ***/
     // var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}$/;
@@ -47,7 +47,7 @@ function signup() {
         if (data.success) {
             // after 1 second, move to "login.html"
             setTimeout(function(){
-                window.location = "login.html";
+                window.location.replace("login.html");
             }, 1000);
         }
     })
