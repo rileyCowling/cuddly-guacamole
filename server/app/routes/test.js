@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/entry',function(req,res){
-  const newUser = new Student({
+  const newUser = new User({
     name: req.body.name,
     age: req.body.age,
   });
