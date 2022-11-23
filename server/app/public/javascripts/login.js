@@ -17,7 +17,7 @@ function login() {
         window.location.replace("account.html");
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
-        $('#rxData').html(JSON.stringify(jqXHR, null, 2));
+        console.log("Error Logging In");
     });
 }
 

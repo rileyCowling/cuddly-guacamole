@@ -43,13 +43,7 @@ function signup() {
         dataType: 'json'
     })
     .done(function (data, textStatus, jqXHR) {
-        $('#rxData').html(JSON.stringify(data, null, 2));
-        if (data.success) {
-            // after 1 second, move to "login.html"
-            setTimeout(function(){
-                window.location.replace("login.html");
-            }, 1000);
-        }
+        window.location.replace("login.html");
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         if (jqXHR.status == 404) {
