@@ -8,24 +8,26 @@ function signup() {
         window.alert("Invalid Password");
         return;
     }
+    
+    //** DO NOT DELETE **/
+    /*** Complexity not necessary for testing ***/
+    // var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}$/;
+    // if($('#email').val().match(email)) { 
+    //     //All good
+    // }
+    // else{ 
+    //     alert('Email is invalid');
+    //     return false;
+    // }
 
-    var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}$/;
-    if($('#email').val().match(email)) { 
-        //All good
-    }
-    else{ 
-        alert('Email is invalid');
-        return false;
-    }
-
-    var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-    if($('#password').val().match(password)) { 
-        //All good
-    }
-    else{ 
-        alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
-        return false;
-    }
+    // var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+    // if($('#password').val().match(password)) { 
+    //     //All good
+    // }
+    // else{ 
+    //     alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
+    //     return false;
+    // }
     
     let txdata = {
         email: $('#email').val(),

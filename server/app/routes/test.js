@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 //This works
-router.post('/entry',function(req,res){
+router.post('/signUp',function(req,res){
   const newUser = new User({
     email: req.body.email,
     password: req.body.pw,
