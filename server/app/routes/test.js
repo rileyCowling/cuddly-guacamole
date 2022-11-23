@@ -2,16 +2,30 @@ var express = require('express');
 var router = express.Router();
 const app = express();
 
+var User = require("../models/user");
+var Data = require("../models/data");
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
 
-router.post('/data',function(req,res){
-  let msgStr = 'Heart rate is ${req.body.heartBeat} BPM';
-  res.status(201).json({message: msgStr});
-  console.log(msgStr);
+router.post('/entry',function(req,res){
+  const newUser = new Student({
+    name: req.body.name,
+    age: req.body.age,
+  });
+  newStudent.save(function (err, student) {
+    if (err) {
+      res.status(400).send(err);
+    }
+    else {
+      let msgStr = `User (${req.body.name}) info has been saved.`;
+      res.status(201).json({ message: msgStr });
+      console.log(msgStr);
+    }
+  });
 });
 
 module.exports = router;
