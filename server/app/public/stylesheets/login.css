@@ -21,11 +21,18 @@
 .dataForm label {
     display: table-cell;
     text-align: right;
+    padding-right: 10px;
 }
 
 .dataForm input {
     display: table-cell;
 }
+
+.userType{
+    text-align: right;
+}
+
+
 
 textarea {
     display: none;
