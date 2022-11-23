@@ -162,4 +162,9 @@ void loop(){
   Serial.print(spo2, DEC);
   Serial.print(F("%"));
   Serial.println();
+  
+  //Webhook for sending data to the server
+  String data = String(heartRate);
+  Particle.publish("dataEntry", data, PRIVATE);
+
 }
