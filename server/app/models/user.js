@@ -3,6 +3,8 @@ const db = require("../db");
 const userSchema = new db.Schema({
     name:       String,
     age:        Number,
+    email:      String,
+    password:   String,
     heartRate:  Array,
     spo2:       Array
     // NEED TO COME UP WITH WHAT THIS LOOKS LIKE 

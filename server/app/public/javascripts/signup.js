@@ -29,7 +29,7 @@ function signup() {
 
     //send info to server (direct copy, havent tested yet)
     $.ajax({
-        url: '/customers/signUp',
+        url: '/test/signUp',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(txdata),
