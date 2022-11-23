@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const app = express();
 
-var User = require("../models/patient");
 var Data = require("../models/physician");
 
 /* GET home page. */

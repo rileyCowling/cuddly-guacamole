@@ -3,7 +3,6 @@ var router = express.Router();
 const app = express();
 
 var User = require("../models/patient");
-var Data = require("../models/physician");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,11 +27,18 @@ router.post('/signUp',function(req,res){
   });
 });
 
-router.post('/logIn',function (req,res) {
+router.post('/logIn',function (req,res) { //expecting to recieve an email and password
   let msgStr = `your login request has been recieved for (${req.body.email})`;
   res.status(201).json({ message: msgStr });
   console.log(msgStr);
 
 });
+
+router.post('/dataEntry', function (req,res) { //expecting a heart rate and a spo2 percentage
+  let msgStr = `your data has been recieved: HR = (${req.body.heartRate}) and SPO2 = (${req.body.spo2})%`;
+  res.status(201).json({ message: msgStr });
+  console.log(msgStr);
+
+})
 
 module.exports = router;

@@ -35,6 +35,7 @@ function signup() {
     };
 
     //send info to server (direct copy, havent tested yet)
+    // We need to check if they are wanting to signup as a physician or a patient and change the post request accordingly
     $.ajax({
         url: '/test/signUp',
         method: 'POST',
