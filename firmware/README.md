@@ -4,6 +4,21 @@ A Particle project named 513_Photon_HB_sensor
 
 ## Welcome to your project!
 
+## Pinout/Wiring 
+# MAX30102
+    Vin --> 3.3V
+    SDA --> D0
+    SCL --> D1
+    GND --> GND
+# STATUS LEDS
+    RLED --> D5
+    GLED --> D6
+    BLED --> D2
+    WLED --> A0
+
+
+////Add basic info about this project
+
 Every new Particle project is composed of 3 important elements that you'll see have been created in your project directory for 513_Photon_HB_sensor.
 
 #### ```/src``` folder:  
