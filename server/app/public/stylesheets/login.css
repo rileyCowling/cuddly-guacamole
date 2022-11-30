@@ -1,11 +1,11 @@
 #form {
     background-color: #c8d8e4;
     margin:auto;
-    width:50%;
+    width:80vw;
     text-align: center;
-    height: 250px;
-    padding-top: 20px;
-    margin-top: 150px;
+    height: 25vh;
+    /*padding-top: 20vh;*/
+    margin-top: 15vh;
 }
 
 #userLogin {
@@ -28,11 +28,13 @@
     display: table-cell;
 }
 
-.userType{
-    text-align: right;
+.dataForm select {
+    display: table-cell;
 }
 
-
+.userType{
+    text-align: center;
+}
 
 textarea {
     display: none;
