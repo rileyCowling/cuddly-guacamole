@@ -1,0 +1,18 @@
+#references {
+    display: inline-block;
+    width:50%;
+    min-width:200px;
+    vertical-align: top;
+    margin:auto;
+    margin-bottom: 20px;
+    text-align: left;
+}
+  
+#references p {
+    margin:20px auto;
+    width:90%;
+    height: fit-content;
+    color: black;
+    text-shadow: none;
+    font-size: 20px;
+}
