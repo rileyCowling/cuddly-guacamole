@@ -11,7 +11,7 @@ body {
     width:98vw;
     height: 98vh;
     position: relative;
-    background-color: white;
+    background-color: whitesmoke; /*Whole page background*/
     margin:0px;
     padding:0px;
 }
@@ -33,11 +33,10 @@ body {
   
 /*top banner styling section*/
 #banner {
-    color:black;
     height: 10vh;
     width: 100%;
-    background: #f536d5;
-    box-shadow: 0px 1px 1px #f536d5;
+    background: #501b1d;    /*Banner*/
+    box-shadow: 0px 1px 1px #501b1d;
     position: fixed;
     top:0;
     margin-top:0px;
@@ -63,11 +62,11 @@ body {
 
 #banner a {
     text-decoration: none;
-    color:black;
+    color:#adadad;    /*Banner text*/
 }
 
 #banner a:hover {
-	color: #32a897
+	color: #64485c  /*Banner text on hover*/
 }
 
 /*main content styling section*/
@@ -85,9 +84,18 @@ body {
     margin:20px auto;
     width:90%;
     height: fit-content;
-    color: black;
+    color: #64485c;   /*summary text*/
     text-shadow: none;
     font-size: 20px;
+}
+
+#about ul {
+    margin:10px auto;
+    width:85%;
+    height: fit-content;
+    color: #64485c;   /*summary text*/
+    text-shadow: none;
+    font-size: 16px;
 }
  
 /*member styling section*/
@@ -95,11 +103,11 @@ body {
     margin-top:20px;
     margin-left:5px;
     display: inline-block;
-    background-color: #c8d8e4;
-    color:#32a897;
-    text-shadow: 1px 1px darkgray;
+    background-color: #501b1d;  /*box around team*/
+    color:#adadad;              /*text in above box*/
+    text-shadow: 1px 1px black; /*shadow around above text*/
     border-radius: 5px;
-    box-shadow: 2px 2px 1px black;
+    box-shadow: 2px 2px 1px black; /*shadow around above box*/
     width:70%;
     min-width: 200px;
     height: 61vh;
@@ -113,8 +121,7 @@ body {
 }
 
 .member {
-    color:whitesmoke;
-    text-shadow: 1px 1px darkgray;
+    color:#adadad;               /*text color of names*/
     display:inline-block;
     vertical-align: top;
     width: 25%;
@@ -124,10 +131,10 @@ body {
     min-height: 250px;
     padding:5px;
     margin:5px 2%;
-    border:1px inset gray;
-    background-color: gray;
+    border:1px inset #83677b;          /*Make same as below*/
+    background-color: #83677b;         /*background of members*/
     border-radius: 4px;
-    box-shadow: 4px 4px 4px 2px black;
+    box-shadow: 4px 4px 4px 2px black; /*Shadow behind member boxes*/
     overflow: hidden;
 }
 
@@ -148,7 +155,7 @@ body {
     width: auto;
     margin:auto;
     display: block;
-    box-shadow: 2px 2px 2px black;
+    box-shadow: 2px 2px 2px black; /*shadow behind member pictures*/
 }
 
 .member h2 {
@@ -162,5 +169,5 @@ body {
 }
 
 .member a {
-    color:whitesmoke;
+    color:#adadad;   /*member emails, make same as member names*/
 }

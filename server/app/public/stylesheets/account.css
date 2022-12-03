@@ -1,11 +1,16 @@
 #account {
-    background-color: #c8d8e4;
+    background-color: #501b1d;  /*Content box 501b1d*/
+    color:#adadad;              /*text in above box*/
     margin:auto;
     width:50%;
     text-align: center;
     height: 600px;
     padding-top: 20px;
     margin-top: 100px;
+}
+
+button, select, option, input {
+    color: black;
 }
 
 #accountInfo {
@@ -32,7 +37,8 @@ h2 {
 }
 
 #summary {
-    background-color: #c8d8e4;
+    background-color: #501b1d;  /*Content box 501b1d*/
+    color:#adadad;              /*text in above box*/
     margin:auto;
     width:50%;
     text-align: center;
@@ -48,4 +54,8 @@ h2 {
     margin: auto;
     width: 45vw;
     height: 40vh;
+}
+
+canvas {
+    background-color: white;
 }

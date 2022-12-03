@@ -43,7 +43,8 @@ thead {
 }
 
 #account {
-    background-color: #c8d8e4;
+    background-color: #501b1d;  /*Content box 501b1d*/
+    color:#adadad;              /*text in above box*/
     margin:auto;
     width:70%;
     text-align: center;

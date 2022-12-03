@@ -1,11 +1,16 @@
 #form {
-    background-color: #c8d8e4;
+    background-color: #501b1d;  /*Content box 501b1d*/
+    color:#adadad;              /*text in above box*/
     margin:auto;
-    width:80vw;
+    width:50%;
     text-align: center;
-    height: 25vh;
-    /*padding-top: 20vh;*/
-    margin-top: 15vh;
+    height: 250px;
+    padding-top: 20px;
+    margin-top: 150px;
+}
+
+button, select, option, input {
+    color: black;
 }
 
 #userLogin {
@@ -25,10 +30,6 @@
 }
 
 .dataForm input {
-    display: table-cell;
-}
-
-.dataForm select {
     display: table-cell;
 }
 

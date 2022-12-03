@@ -1,18 +1,21 @@
+#container {
+    background-color: #501b1d;  /*Content box 501b1d*/
+    color:#adadad;              /*text in above box*/
+    margin:auto;
+    width:50%;
+    text-align: center;
+    height: 250px;
+    padding-top: 20px;
+    margin-top: 150px;
+}
+
 #references {
     display: inline-block;
-    width:50%;
+    width:70%;
     min-width:200px;
     vertical-align: top;
     margin:auto;
     margin-bottom: 20px;
     text-align: left;
 }
-  
-#references p {
-    margin:20px auto;
-    width:90%;
-    height: fit-content;
-    color: black;
-    text-shadow: none;
-    font-size: 20px;
-}
+
