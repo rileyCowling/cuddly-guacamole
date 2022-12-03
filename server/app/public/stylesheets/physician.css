@@ -1,0 +1,66 @@
+
+.cell-1 {
+    border-collapse: separate;
+    border-spacing: 0 4em;
+    background: #ffffff;    /*User Cells*/
+    background-clip: padding-box;
+    cursor: pointer
+}
+
+.cell-2 {
+    border-collapse: separate;
+    border-spacing: 0 4em;
+    background: #ffffff;
+    background-clip: padding-box;
+}
+
+.cell-3 {
+    border-collapse: separate;
+    border-spacing: 0 4em;
+    background: #ffffff;
+    background-clip: padding-box;
+    height: 600px;
+}
+
+thead {
+    background: #dddcdc     /*Header Cell*/
+}
+
+.table-elipse {
+    cursor: pointer
+}
+
+#demo {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s 0.1s ease-in-out;
+    transition: all 0.3s ease-in-out
+}
+
+.row-child {
+    background-color: #fff; /*Hidden Cell background, text*/
+    color: #000
+}
+
+#account {
+    background-color: #c8d8e4;
+    margin:auto;
+    width:70%;
+    text-align: center;
+    height: 1000px;
+    padding-top: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+.graphContainer {
+    display: none;
+    position: relative;
+    margin: auto;
+    width: 45vw;
+    height: 40vh;
+}
