@@ -9,7 +9,7 @@
         <link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./javascripts/script.js"></script>
-        <script src="javascripts/account.js"></script>
+        <script src="javascripts/physician.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   <!--Chart.js for graph displays-->
 
         <!--3 script files are testing for drop down table-->
@@ -77,7 +77,7 @@
                                             <tr id="demo" class="collapse cell-2 row-child">
                                                 <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
                                                 <td colspan="1">Select a day of the week:</td>
-                                                <td colspan="1"><select name="day" id="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
+                                                <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
                                                     <option id="selectDay" selected=true disabled>Select</option>
                                                     <option value="1">Monday</option>
                                                     <option value="2">Tuesday</option>
@@ -87,9 +87,57 @@
                                                     <option value="6">Saturday</option>
                                                     <option value="7">Sunday</option>
                                                 </select></td>
-                                                <td colspan="2"><button id="resetGraph">Choose a new date</button></td>
+                                                <td colspan="2"></td>
                                             </tr>
-                                            <tr id="demo" class="collapse cell-3 row-child">
+                                            <!--USER 1 END-->
+
+                                            <!--USER 2 BEGIN-->
+                                            <tr class="cell-1" data-toggle="collapse" data-target="#demo2">
+                                                <td class="text-center">User 2</td>
+                                                <td>82 bpm</td>
+                                                <td>97 bpm</td>
+                                                <td>68 bpm</td>
+                                                <td class="table-elipse" data-toggle="collapse" data-target="#demo2"><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                            </tr>
+                                            <tr id="demo2" class="collapse cell-2 row-child">
+                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                <td colspan="1">Frequency of measurements</td>
+                                                <td colspan="1"><select name="frequency" id="frequency">
+                                                    <option value="0">Once every 5 minutes</option>
+                                                    <option value="1">Once every 10 minutes</option>
+                                                    <option value="2">Once every 30 minutes</option>
+                                                    <option value="3">Once every hour</option>
+                                                    <option value="4">Once every 2 hours</option>
+                                                    <option value="5">Once every 4 hours</option>
+                                                    <option value="6">Once every 6 hours</option>
+                                                    <option value="7">Once every 12 hours</option>
+                                                </select></td>
+                                                <td colspan="2"><button id="measurements" class="info">Save Changes</button></td>
+                                            </tr>
+                                            <tr id="demo2" class="collapse cell-2 row-child">
+                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                <td colspan="1">Select a day of the week:</td>
+                                                <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
+                                                    <option id="selectDay" selected=true disabled>Select</option>
+                                                    <option value="1">Monday</option>
+                                                    <option value="2">Tuesday</option>
+                                                    <option value="3">Wednesday</option>
+                                                    <option value="4">Thursday</option>
+                                                    <option value="5">Friday</option>
+                                                    <option value="6">Saturday</option>
+                                                    <option value="7">Sunday</option>
+                                                </select></td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                            <!--USER 2 END-->
+
+                                            <!--Need to implement an update system for users rather than hard code each-->
+
+                                            <!--Graph area-->
+                                            <tr class="cell-2">
+                                                <td colspan="5"><button id="resetGraph">Clear Graphs</button></td>
+                                            </tr>
+                                            <tr class="cell-3">
                                                 <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
                                                 <td colspan="4"><div class="graphContainer" id="graphContainer">
                                                     <canvas id="bpmGraph"></canvas>
@@ -99,11 +147,14 @@
                                                 <script>
                                                     var bpmChart;
                                                     var oxyChart;
-                            
+                                                    
                                                     document.getElementById("resetGraph").onclick = function() {
                                                         bpmChart.destroy();
                                                         oxyChart.destroy();
-                                                        document.getElementById("day").selectedIndex=0;
+                                                        var days = document.getElementsByClassName("day");
+                                                        for(let i = 0; i < days.length; i++) {
+                                                            days[i].selectedIndex = 0;
+                                                        }
                                                     }
                         
                                                     //Cannot get function to work in account.js, moved directly into account.html
@@ -194,7 +245,7 @@
                                                     }
                                                 </script></td>
                                             </tr>
-                                            <!--USER 1 END-->
+                                            <!--Graph area-->
                                         </tbody>
                                     </table>
                                 </div>
