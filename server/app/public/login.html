@@ -3,7 +3,7 @@
     <head>
         <meta charset="uft-8">
         <meta name="viewport" content="width=device-width">
-        <title>Login</title>
+        <title>Sign Up</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="stylesheets/login.css" rel="stylesheet" type="text/css" />
         <link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
@@ -17,7 +17,6 @@
 				<div id="header">
 					<a href="index.html" id="header">Heart Rate Monitoring</a>
 				</div>
-				
                 <div id="links">
                     <!-- <a href="index.html">Home</a> -->
                     <a href="reference.html">References</a> <!--TODO-->
@@ -25,21 +24,30 @@
                     <a href="login.html">Login</a>
                     <a href="account.html">My&nbspAccount</a> <!--TODO, remove from home, sign up, login pages after made-->
                 </div>
-            </div>
+            
                 <div id="form">
                     <h1>Log In</h1>
                     <div id="userLogin">
                         <div class="dataForm">
-                            <label for="email">Email: </label>
+                            <label for="user">User:</label>
+                            <select name="user" class="dataForm" id="user" >
+                            <option value="Patient">Patient</option>
+                            <option value="Physician">Physician</option>
+                            </select>
+                        </div>
+                        <div class="dataForm">
+                            <label for="email">Email:</label>
                             <input type="text" id="email" placeholder="Enter Email" name="email">
                         </div>
                         <div class="dataForm">
-                            <label for="password">Password: </label>
+                            <label for="password">Password:</label>
                             <input type="password" id="password" placeholder="Enter Password" name="password">
                         </div>
+                        </div>
+                            <br/>
+                            <button id="loginButton" class="dataForm">Log In</button>
+                        </div>
                     </div>
-                    <p></p>
-                    <button id="loginButton" class="dataForm">Log In</button>
                 </div>
             </div>
         </div>

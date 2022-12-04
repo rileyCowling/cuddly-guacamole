@@ -15,7 +15,6 @@ const bodyParser = require('body-parser');     // Parses JSON in body
 //Needed for adding routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testRouter = require('./routes/test');
 var physicianRouter = require('./routes/physicians');
 var patientRouter = require('./routes/patients');
 
@@ -52,14 +51,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /********* Important **********/
-//Needed for adding routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/test", testRouter);
+// Our Routes
 app.use("/physicians", physicianRouter);
 app.use("/patients", patientRouter);
 
-//Express Generated
+// Express Generated
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
