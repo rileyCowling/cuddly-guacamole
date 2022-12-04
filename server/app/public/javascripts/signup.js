@@ -50,7 +50,11 @@ function signup() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) {window.location.replace("login.html");})          // Success
-        .fail(function (jqXHR, textStatus, errorThrown) {window.alert("An Error Has Occured");});   // Failure
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            if(jqXHR.status == 401){
+                window.alert("A user with that email already exists.");
+            } 
+        });    // Failure
     }
     if($('#user').val() === "Physician"){
         // AJAX POST Request for physician route
@@ -62,7 +66,11 @@ function signup() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) {window.location.replace("login.html");})          // Success
-        .fail(function (jqXHR, textStatus, errorThrown) {window.alert("An Error Has Occured");});   // Failure
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            if(jqXHR.status == 401){
+                window.alert("A user with that email already exists.");
+            } 
+        });   // Failure
     }
     
 }
