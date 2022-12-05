@@ -63,6 +63,11 @@ router.post("/login", function (req, res) {
   });
 });
 
+router.post("/dataEntry", function (req, res) {
+    let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})% `;
+    res.status(201).json({ message: msgStr });
+    console.log(msgStr);
+  });
 
 
 module.exports = router;
