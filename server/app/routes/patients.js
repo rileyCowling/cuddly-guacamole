@@ -82,7 +82,8 @@ router.post("/dataEntry", function (req, res) {
         else {
             patient.bpm.push(req.body.heartRate);
             patient.oxy.push(req.body.spo2);
-            let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})% \n Current list of heart rates ${patient.bpm}`;
+            const string = JSON.stringify(patient.bpm);
+            let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})% \n Current list of heart rates ${string}`;
             res.status(201).json({ message: msgStr });
             console.log(msgStr);
         }
