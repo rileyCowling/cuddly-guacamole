@@ -26,7 +26,7 @@ int8_t validHeartRate; //indicator to show if the heart rate calculation is vali
 
 //Added Vas
 //Status LEDs
-int R_LED=D2, G_LED=D6, B_LED=D5, W_LED=A0;
+int R_LED=D5, G_LED=D6, B_LED=D2, W_LED=A0;
 
 int fingerPresent;
 bool rangeSetter = false;

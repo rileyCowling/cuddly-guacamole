@@ -3,10 +3,12 @@
 /******************************************************/
 
 #include "Particle.h"
-#line 1 "/Users/rileycowling/Desktop/ECE513/513_Photon_HB_sensor/src/513_Photon_HB_sensor.ino"
+#line 1 "/Users/rileycowling/Documents/GitHub/cuddly-guacamole/firmware/src/513_Photon_HB_sensor.ino"
 /* 
 *   ECE 513 IOT Project
 */
+
+//this is to test github
 
 //Inclusion of library header files
 #include <Wire.h>
@@ -15,7 +17,7 @@
 
 void setup();
 void loop();
-#line 10 "/Users/rileycowling/Desktop/ECE513/513_Photon_HB_sensor/src/513_Photon_HB_sensor.ino"
+#line 12 "/Users/rileycowling/Documents/GitHub/cuddly-guacamole/firmware/src/513_Photon_HB_sensor.ino"
 MAX30105 particleSensor;
 
 #define MAX_BRIGHTNESS 255
@@ -33,7 +35,7 @@ int8_t validHeartRate; //indicator to show if the heart rate calculation is vali
 
 //Added Vas
 //Status LEDs
-int R_LED=D2, G_LED=D6, B_LED=D5, W_LED=A0;
+int R_LED=D5, G_LED=D6, B_LED=D2, W_LED=A0;
 
 int fingerPresent;
 bool rangeSetter = false;
@@ -81,7 +83,8 @@ void loop(){
     digitalWrite(G_LED,LOW);
     digitalWrite(B_LED, LOW);
     Serial.println(" No finger?");
-
+    
+    //we dont want to take unnecessary data
     //while there is no finger flash red LED
     while(fingerPresent==0){ 
       digitalWrite(R_LED,HIGH);
@@ -168,4 +171,12 @@ void loop(){
   Serial.print(spo2, DEC);
   Serial.print(F("%"));
   Serial.println();
+  
+  //Webhook for sending data to the server
+  String data1 = String(heartRate);
+  String data2 = String(spo2);
+  String data = data1 + data2;
+  Particle.publish("dataEntry", data, PRIVATE);
+  
+
 }
