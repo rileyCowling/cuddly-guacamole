@@ -4,8 +4,8 @@ const patientSchema = new db.Schema({
     id:         String,
     email:      String,
     password:   String,
-    bpm:        [Number],
-    oxy:        [Number]
+    bpm:        Array,
+    oxy:        Array
 });
 
 
