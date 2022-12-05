@@ -164,7 +164,10 @@ void loop(){
   Serial.println();
   
   //Webhook for sending data to the server
-  String data = String(heartRate);
+  String data1 = String(heartRate);
+  String data2 = String(spo2);
+  String data = data1 + data2;
   Particle.publish("dataEntry", data, PRIVATE);
+  
 
 }
