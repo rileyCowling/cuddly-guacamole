@@ -5,15 +5,7 @@ const jwt = require("jwt-simple");
 const bcrypt = require("bcryptjs");
 const fs = require('fs');
 const uuid = require('uuid');
-
-
-
-
-// On AWS ec2, you can use to store the secret in a separate file. 
-// The file should be stored outside of your code directory. 
-// For encoding/decoding JWT
 const secret = fs.readFileSync(__dirname + '/../keys/jwtkey').toString();
-
 
 
 router.post("/signUp", function (req, res) {
@@ -80,18 +72,13 @@ router.post("/dataEntry", function (req, res) {
             res.status(401).json({ error: "Could not find ID!!" });
         }
         else {
+            //save the data to the arrays
             patient.bpm.push(req.body.heartRate);
             patient.oxy.push(req.body.spo2);
             patient.save();
             let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})%`;
             res.status(201).json({ message: msgStr });
-            console.log(msgStr);
-            for(let i = 0; i < patient.bpm.length; i++){
-                console.log(patient.bpm[i]);
-            }
         }
-    
-        
     });
 });
 
