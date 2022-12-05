@@ -80,8 +80,8 @@ router.post("/dataEntry", function (req, res) {
             res.status(401).json({ error: "Could not find ID!!" });
         }
         else {
-            patient.bpm.append(req.body.heartRate);
-            patient.oxy.append(req.body.spo2);
+            patient.bpm.push(req.body.heartRate);
+            patient.oxy.push(req.body.spo2);
             let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})%`;
             res.status(201).json({ message: msgStr });
             console.log(msgStr);
