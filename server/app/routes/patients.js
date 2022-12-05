@@ -63,7 +63,8 @@ router.post("/login", function (req, res) {
 });
 
 router.post("/dataEntry", function (req, res) {
-    console.log(req.body)
+    let msgStr = req.body.data;
+    res.status(200).json(msgStr);
     // Patient.findOne({ id: req.body.id }, function (err, patient) {
     //     if (err) {
     //         res.status(400).send(err);
