@@ -171,12 +171,19 @@ void loop(){
   Serial.print(spo2, DEC);
   Serial.print(F("%"));
   Serial.println();
+
+  digitalWrite(W_LED,HIGH);
+  delay(200);
+  digitalWrite(W_LED,LOW);
   
   //Webhook for sending data to the server
   String data1 = String(heartRate);
   String data2 = String(spo2);
-  String data = "heartRate:" + data1 + ", " + "spo2:" + data2;
+  String data = "{heartRate:" + data1 + ", " + "spo2:" + data2+"}";
   Particle.publish("dataEntry", data, PRIVATE);
   
+  digitalWrite(W_LED,HIGH);
+  delay(200);
+  digitalWrite(W_LED,LOW);
 
 }

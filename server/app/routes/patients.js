@@ -64,7 +64,7 @@ router.post("/login", function (req, res) {
 });
 
 router.post("/dataEntry", function (req, res) {
-    console.log(JSON.stringify(req.body.data));
+    console.log(req.body.data);
     res.status(200).json("{ message: recieved}")
     
     // Patient.findOne({ id: req.body.id }, function (err, patient) {
