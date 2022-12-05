@@ -175,7 +175,7 @@ void loop(){
   //Webhook for sending data to the server
   String data1 = String(heartRate);
   String data2 = String(spo2);
-  String data = data1 + data2;
+  String data = "heartRate:" + data1 + ", " + "spo2:" + data2;
   Particle.publish("dataEntry", data, PRIVATE);
   
 
