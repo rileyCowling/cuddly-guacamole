@@ -4,6 +4,10 @@ var Patient = require("../models/patient");
 const jwt = require("jwt-simple");
 const bcrypt = require("bcryptjs");
 const fs = require('fs');
+const uuid = require('uuid');
+
+
+
 
 // On AWS ec2, you can use to store the secret in a separate file. 
 // The file should be stored outside of your code directory. 
@@ -22,7 +26,9 @@ router.post("/signUp", function (req, res) {
            const passwordHash = bcrypt.hashSync(req.body.password, 10);
            const newPatient = new Patient({
                email: req.body.email,
-               password: passwordHash
+               password: passwordHash,
+               //I want to do some sort of easy id
+               id: uuid.v4() // "c438f870-f2b7-4b2c-a1c3-83bd88bb1d79"
            });
 
            newPatient.save(function (err, patient) {
@@ -30,7 +36,8 @@ router.post("/signUp", function (req, res) {
                    res.status(400).json({ success: false, err: err });
                }
                else {
-                   let msgStr = `Patient with (${req.body.email}), account has been created.`;
+                   
+                   let msgStr = `Patient with (${req.body.email}), account has been created.\nID#: ${newPatient.id}`;
                    res.status(201).json({ success: true, message: msgStr });
                    console.log(msgStr);
                }
@@ -64,10 +71,25 @@ router.post("/login", function (req, res) {
 });
 
 router.post("/dataEntry", function (req, res) {
-    let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})% `;
-    res.status(201).json({ message: msgStr });
-    console.log(msgStr);
-  });
+    Patient.findOne({ id: req.body.id }, function (err, patient) {
+        if (err) {
+            res.status(400).send(err);
+        }
+        else if (!patient) {
+            // ID not in the database
+            res.status(401).json({ error: "Could not find ID!!" });
+        }
+        else {
+            patient.bpm.push(req.body.heartRate);
+            patient.oxy.push(req.body.spo2);
+            let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})% \n Current list of heart rates ${patient.bpm}`;
+            res.status(201).json({ message: msgStr });
+            console.log(msgStr);
+        }
+    
+        
+    });
+});
 
 
 module.exports = router;

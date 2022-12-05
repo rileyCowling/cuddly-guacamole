@@ -4,7 +4,12 @@
 //y axis - values
 //also show min and max
 
+
+
+
 /* 
+
+
 //Cannot get function to work in account.js, moved directly into account.html
 //Displays the daily view graphs
 

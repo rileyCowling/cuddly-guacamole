@@ -2,7 +2,8 @@ const db = require("../db");
 
 const physicianSchema = new db.Schema({
     email:      String,
-    password:   String
+    password:   String,
+    
 });
 
 
