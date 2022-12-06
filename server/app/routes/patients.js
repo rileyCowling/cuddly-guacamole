@@ -75,12 +75,10 @@ router.post("/dataEntry", function (req, res) {
         }
         else {
             const dataObj = JSON.parse(req.body.data);
-            //save the data to the arrays
-            // patient.bpm.push(req.body.heartRate);
-            // patient.oxy.push(req.body.spo2);
-            // patient.save();
-            console.log(dataObj.heartRate);
-            console.log(dataObj.spo2);
+            //save the data to the patient's arrays
+            patient.bpm.push(dataObj.heartRate);
+            patient.oxy.push(dataObj.spo2);
+            patient.save();
             res.status(200).json("{ message: recieved}")
         }
     });

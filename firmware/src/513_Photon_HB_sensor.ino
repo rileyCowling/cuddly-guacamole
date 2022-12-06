@@ -62,6 +62,10 @@ void setup()
 }
 
 void loop(){ 
+  //NEED to set up reoccuring measurment
+
+
+
   /** Finger detection before getting started **/
   if (particleSensor.getIR() < 50000){
     //Setting finger status to zero for not present
