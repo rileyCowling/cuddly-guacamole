@@ -58,8 +58,16 @@
                             <select for="yourPhysician" id="yourPhysician">
                                 <!--Need to make it show all physician account names, default to whichever is chosen-->
                                 <option selected=true disabled>No Physician Chosen</option>
-                                <option value="0">Physician 1</option>
-                                <option value="1">Physician 2</option>
+                                <script>
+                                    let numPhysicians = 5;  //replace with physicians length
+                                    let physicianHTML = "";
+                                    //TODO once connected to recorded data
+                                    //replace "Physician ${i}" with physicians[i] email
+                                    for(let i = 0; i < numPhysicians; i++) {
+                                        physicianHTML += `<option value="${i}">Physician ${i}</option>`;
+                                    }
+                                    document.getElementById("yourPhysician").innerHTML += physicianHTML;
+                                </script>
                             </select>
                         </div>
                     </div>
