@@ -172,7 +172,7 @@ void loop(){
   String data2 = String(spo2);
   String data = "{\"heartRate\": " + data1 + ", " + "\"spo2\": " + data2 + "}";
   Particle.publish("dataEntry", data, PRIVATE);
-  
+  //LED to let you know the data was sent
   digitalWrite(W_LED,HIGH);
   delay(200);
   digitalWrite(W_LED,LOW);
