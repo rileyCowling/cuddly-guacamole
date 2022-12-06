@@ -41,7 +41,10 @@ function login() {
             data: JSON.stringify(txdata),
             dataType: 'json'
         })
-        .done(function (data, textStatus, jqXHR) {window.location.replace("physician.html");})      // Success
+        .done(function (data, textStatus, jqXHR) { // Success
+            console.log(data);
+            window.location.replace("physician.html");
+        })     
         .fail(function (jqXHR, textStatus, errorThrown) {
            if(jqXHR.status == 401){
             window.alert("A user with that email/password does not exist.");
