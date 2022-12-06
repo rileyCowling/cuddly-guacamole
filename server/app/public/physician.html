@@ -49,96 +49,66 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody class="table-body">
-                                            <!--USER 1 BEGIN-->
-                                            <tr class="cell-1" data-toggle="collapse" data-target="#demo">
-                                                <td class="text-center">User 1</td>
-                                                <td>82 bpm</td>
-                                                <td>97 bpm</td>
-                                                <td>68 bpm</td>
-                                                <td class="table-elipse" data-toggle="collapse" data-target="#demo"><i class="fa fa-ellipsis-h text-black-50"></i></td>
-                                            </tr>
-                                            <tr id="demo" class="collapse cell-2 row-child">
-                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                <td colspan="1">Frequency of measurements</td>
-                                                <td colspan="1"><select name="frequency" id="frequency">
-                                                    <option value="0">Once every 5 minutes</option>
-                                                    <option value="1">Once every 10 minutes</option>
-                                                    <option value="2">Once every 30 minutes</option>
-                                                    <option value="3">Once every hour</option>
-                                                    <option value="4">Once every 2 hours</option>
-                                                    <option value="5">Once every 4 hours</option>
-                                                    <option value="6">Once every 6 hours</option>
-                                                    <option value="7">Once every 12 hours</option>
-                                                </select></td>
-                                                <td colspan="2"><button id="measurements" class="info">Save Changes</button></td>
-                                            </tr>
-                                            <tr id="demo" class="collapse cell-2 row-child">
-                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                <td colspan="1">Select a day of the week:</td>
-                                                <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
-                                                    <option id="selectDay" selected=true disabled>Select</option>
-                                                    <option value="1">Monday</option>
-                                                    <option value="2">Tuesday</option>
-                                                    <option value="3">Wednesday</option>
-                                                    <option value="4">Thursday</option>
-                                                    <option value="5">Friday</option>
-                                                    <option value="6">Saturday</option>
-                                                    <option value="7">Sunday</option>
-                                                </select></td>
-                                                <td colspan="2"></td>
-                                            </tr>
-                                            <!--USER 1 END-->
-
-                                            <!--USER 2 BEGIN-->
-                                            <tr class="cell-1" data-toggle="collapse" data-target="#demo2">
-                                                <td class="text-center">User 2</td>
-                                                <td>82 bpm</td>
-                                                <td>97 bpm</td>
-                                                <td>68 bpm</td>
-                                                <td class="table-elipse" data-toggle="collapse" data-target="#demo2"><i class="fa fa-ellipsis-h text-black-50"></i></td>
-                                            </tr>
-                                            <tr id="demo2" class="collapse cell-2 row-child">
-                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                <td colspan="1">Frequency of measurements</td>
-                                                <td colspan="1"><select name="frequency" id="frequency">
-                                                    <option value="0">Once every 5 minutes</option>
-                                                    <option value="1">Once every 10 minutes</option>
-                                                    <option value="2">Once every 30 minutes</option>
-                                                    <option value="3">Once every hour</option>
-                                                    <option value="4">Once every 2 hours</option>
-                                                    <option value="5">Once every 4 hours</option>
-                                                    <option value="6">Once every 6 hours</option>
-                                                    <option value="7">Once every 12 hours</option>
-                                                </select></td>
-                                                <td colspan="2"><button id="measurements" class="info">Save Changes</button></td>
-                                            </tr>
-                                            <tr id="demo2" class="collapse cell-2 row-child">
-                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                <td colspan="1">Select a day of the week:</td>
-                                                <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
-                                                    <option id="selectDay" selected=true disabled>Select</option>
-                                                    <option value="1">Monday</option>
-                                                    <option value="2">Tuesday</option>
-                                                    <option value="3">Wednesday</option>
-                                                    <option value="4">Thursday</option>
-                                                    <option value="5">Friday</option>
-                                                    <option value="6">Saturday</option>
-                                                    <option value="7">Sunday</option>
-                                                </select></td>
-                                                <td colspan="2"></td>
-                                            </tr>
-                                            <!--USER 2 END-->
-
-                                            <!--Need to implement an update system for users rather than hard code each-->
-
+                                        <tbody id="tableBody" class="table-body">
+                                            <!--Test dynamic dropdown-->
+                                            <script>
+                                                let numPatients = 4;    //replace with physicians patientList length
+                                                let newHeight = 1150 + (75*(numPatients-1));
+                                                document.getElementById("account").style.height = newHeight+"px";
+                                                let tableHTML = "";
+                                                //TODO once connected to recorded data
+                                                //replace "User ${i}" with physicians patientList[i] email[i]
+                                                //replace 3 bpm values with physicians patientList[i] avg, max, min
+                                                //make default of frequency drop down equal physicians patientList[i] frequency
+                                                for (let i = 0; i < numPatients; i++) {
+                                                    tableHTML += `<tr class="cell-1" data-toggle="collapse" data-target="#demo${i}">
+                                                        <td class="text-center">User ${i}</td>
+                                                        <td>82 bpm</td>
+                                                        <td>97 bpm</td>
+                                                        <td>68 bpm</td>
+                                                        <td class="table-elipse" data-toggle="collapse" data-target="#demo${i}"><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                                    </tr>
+                                                    <tr id="demo${i}" class="collapse cell-2 row-child">
+                                                        <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                        <td colspan="1">Frequency of measurements</td>
+                                                        <td colspan="1"><select name="frequency" id="frequency">
+                                                            <option value="0">Once every 5 minutes</option>
+                                                            <option value="1">Once every 10 minutes</option>
+                                                            <option value="2">Once every 30 minutes</option>
+                                                            <option value="3">Once every hour</option>
+                                                            <option value="4">Once every 2 hours</option>
+                                                            <option value="5">Once every 4 hours</option>
+                                                            <option value="6">Once every 6 hours</option>
+                                                            <option value="7">Once every 12 hours</option>
+                                                        </select></td>
+                                                        <td colspan="2"><button id="measurements" class="info">Save Changes</button></td>
+                                                    </tr>
+                                                    <tr id="demo${i}" class="collapse cell-2 row-child">
+                                                        <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                        <td colspan="1">Select a day of the week:</td>
+                                                        <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
+                                                            <option id="selectDay" selected=true disabled>Select</option>
+                                                            <option value="1">Monday</option>
+                                                            <option value="2">Tuesday</option>
+                                                            <option value="3">Wednesday</option>
+                                                            <option value="4">Thursday</option>
+                                                            <option value="5">Friday</option>
+                                                            <option value="6">Saturday</option>
+                                                            <option value="7">Sunday</option>
+                                                        </select></td>
+                                                        <td colspan="2"></td>
+                                                    </tr>`
+                                                }
+                                                document.getElementById('tableBody').innerHTML = tableHTML;
+                                            </script>
+                                            <!--Test dynamic dropdown-->
+                                            
                                             <!--Graph area-->
                                             <tr class="cell-2">
                                                 <td colspan="5"><button id="resetGraph">Clear Graphs</button></td>
                                             </tr>
                                             <tr class="cell-3">
-                                                <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                <td colspan="4"><div class="graphContainer" id="graphContainer">
+                                                <td colspan="5"><div class="graphContainer" id="graphContainer">
                                                     <canvas id="bpmGraph"></canvas>
                                                     <canvas id="oxyGraph"></canvas>
                                                     </div>
