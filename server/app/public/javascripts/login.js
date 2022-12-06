@@ -26,7 +26,7 @@ function login() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) {
-            console.log(data);
+            console.log(jqXHR.JSON);
             window.location.replace("account.html");
         })        // Success
         .fail(function (jqXHR, textStatus, errorThrown) {
