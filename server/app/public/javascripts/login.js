@@ -1,4 +1,3 @@
-//direct copy, havent tested yet
 function login() {
     // Ensure that the user has entered an email and password 
     if ($('#email').val() === "") {

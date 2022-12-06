@@ -14,19 +14,20 @@
     </head>
     <body>
         <div id="containerContent">
+            <!--Navigation Bar-->
             <div id="banner">
 				<div id="header">
 					<a href="index.html" id="header">Heart Rate Monitoring</a>
 				</div>
-				
                 <div id="links">
-                    <a href="reference.html">References</a> <!--TODO-->
+                    <a href="reference.html">References</a>
                     <a href="signup.html">Sign Up</a>
                     <a href="login.html">Login</a>
                     <a href="account.html">My&nbspAccount</a> <!--TODO, remove from home, sign up, login pages after made-->
                     <a href="physician.html">Physician</a> <!--TODO, remove from home, sign up, login pages after made-->
                 </div>
             </div>
+                <!--Account info section for adding/removing device, changing password, choosing a physician, choosing time range/frequency and logout-->
                 <div id="account">
                     <h1>Account Information</h1>
                     <h2>Add or Remove Particle Board</h2>
@@ -56,8 +57,9 @@
                         <div class="info">
                             <label for="yourPhysician">Your Physician:</label>
                             <select for="yourPhysician" id="yourPhysician">
-                                <!--Need to make it show all physician account names, default to whichever is chosen-->
+                                <!--TODO Need to make it default to whichever physician is chosen-->
                                 <option selected=true disabled>No Physician Chosen</option>
+                                <!--Script makes physician select tag have as many options as there are physician accounts-->
                                 <script>
                                     let numPhysicians = 5;  //replace with physicians length
                                     let physicianHTML = "";
@@ -74,8 +76,9 @@
                     <p></p>
                     <p></p>
                     <div id="accountInfo">
+                        <!--Sets start/end/frequency for device measurement requests-->
                         <div class="info">
-                            <!--Need to set default values to what is currently selected on board-->
+                            <!--TODO Need to set default values to what is currently selected on board-->
                             <label for="startTime">Start requesting measurements:</label>
                             <select name="startTime" id="startTime">
                                 <option value="0">12:00AM</option>
@@ -154,6 +157,7 @@
                     <button id="logoutButton">Logout</button>
                 </div>
                 <div id="summary">
+                    <!--Weekly/Daily views-->
                     <h2>Weekly Summary</h2> <!--average, min, max heart rate over 7 days-->
                     <div class="accountInfo">
                         <p>Over the past seven days, your heart rate has been:</p>
@@ -164,6 +168,7 @@
                     <h2>Daily View</h2>
                     <div class="accountInfo">
                         <label for="day">Select a day of the week:</label>
+                        <!--Select day to be displayed on charts-->
                         <select name="day" id="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
                             <option id="selectDay" selected=true disabled>Select</option>
                             <option value="1">Monday</option>
@@ -177,12 +182,13 @@
                         <p></p>
                         <p></p>
                         <button id="resetGraph">Choose a new date</button>
-                        
+                        <!--Chart.js needs canvas defined before graphs can be made/deleted-->
                         <div id="graphContainer">
                             <canvas id="bpmGraph"></canvas>
                             <canvas id="oxyGraph"></canvas>
                         </div>
-                        
+                        <!--Script gets data from patient account and displays the corresponding data from the selected day-->
+                        <!--Could not get code to work in separate js file, but works directly in html file-->
                         <script>
                             var bpmChart;
                             var oxyChart;
@@ -194,11 +200,11 @@
                                 document.getElementById("graphContainer").style.display = "none";
                             }
 
-                            //Cannot get function to work in account.js, moved directly into account.html
-                            //Chooses the data for a given day (from dropdown) Assuming bpm (and other needed values are formated like this)
+                            //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
                             function dayChoice(day) {
                                 switch(day) {
                                     //bpm value, oxy percent;
+                                    //TODO replace set values with patient values
                                     case "1": var bpm = [1, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
                                               var oxy = [1, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
                                               break;
@@ -228,12 +234,13 @@
                             function displayGraph(day) {
 
                                 let [bpm, oxy] = dayChoice(day);
-                                //some error? Shouldnt happen but just incase
+                                //Shouldnt happen but just incase
                                 if(bpm == 0) {
                                     console.log("no choice yet");
                                     return;
                                 }
 
+                                //Make chart area visible and code needed for Chart.js to function
                                 document.getElementById("graphContainer").style.display = "block";
                                 //bpm chart
                                 const ctx1 = document.getElementById('bpmGraph');

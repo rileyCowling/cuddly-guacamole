@@ -11,8 +11,7 @@
         <script src="./javascripts/script.js"></script>
         <script src="javascripts/physician.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   <!--Chart.js for graph displays-->
-
-        <!--3 script files are testing for drop down table-->
+        <!--3 script, 1 style files for drop down table-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -21,12 +20,12 @@
     <body>
         <div id="containerContent">
             <div id="banner">
+                <!--Navigation Bar-->
                 <div id="header">
                     <a href="index.html" id="header">Heart Rate Monitoring</a>
                 </div>
-                
                 <div id="links">
-                    <a href="reference.html">References</a> <!--TODO-->
+                    <a href="reference.html">References</a>
                     <a href="signup.html">Sign Up</a>
                     <a href="login.html">Login</a>
                     <a href="physician.html">My Account</a> <!--TODO, remove from home, sign up, login pages after made-->
@@ -39,6 +38,7 @@
                         <div class="col-md-10">
                             <div class="rounded">
                                 <div class="table-responsive table-borderless">
+                                    <!--Expandable table-->
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -50,16 +50,21 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody" class="table-body">
-                                            <!--Test dynamic dropdown-->
+                                            <!--Dynamic dropdown that has as many rows as the physician has patients-->
                                             <script>
-                                                let numPatients = 4;    //replace with physicians patientList length
-                                                let newHeight = 1150 + (75*(numPatients-1));
+                                                let numPatients = 4;    //TODO replace with physicians patientList length
+                                                let newHeight = 1150 + (75*(numPatients-1));    //adjust size of container so it fits all patients
                                                 document.getElementById("account").style.height = newHeight+"px";
                                                 let tableHTML = "";
                                                 //TODO once connected to recorded data
                                                 //replace "User ${i}" with physicians patientList[i] email[i]
                                                 //replace 3 bpm values with physicians patientList[i] avg, max, min
                                                 //make default of frequency drop down equal physicians patientList[i] frequency
+
+                                                //For each patient, add the following code into the table:
+                                                // A row for their average, max, min bpm
+                                                // A row for the physician to change the specific patients frequency of measurements
+                                                // A row for the physician to choose a day of the week for the patients two charts to be displayed
                                                 for (let i = 0; i < numPatients; i++) {
                                                     tableHTML += `<tr class="cell-1" data-toggle="collapse" data-target="#demo${i}">
                                                         <td class="text-center">User ${i}</td>
@@ -101,9 +106,10 @@
                                                 }
                                                 document.getElementById('tableBody').innerHTML = tableHTML;
                                             </script>
-                                            <!--Test dynamic dropdown-->
+                                            <!--Dynamic dropdown end-->
                                             
-                                            <!--Graph area-->
+                                            <!--Graph area, two rows for reset button and for charts-->
+                                            <!--Charts use essentially the same code as in the account.html script-->
                                             <tr class="cell-2">
                                                 <td colspan="5"><button id="resetGraph">Clear Graphs</button></td>
                                             </tr>
@@ -126,11 +132,11 @@
                                                         }
                                                     }
                         
-                                                    //Cannot get function to work in account.js, moved directly into account.html
-                                                    //Chooses the data for a given day (from dropdown) Assuming bpm (and other needed values are formated like this)
+                                                    //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
                                                     function dayChoice(day) {
                                                         switch(day) {
                                                             //bpm value, oxy percent;
+                                                            //TODO replace set values with patient values
                                                             case "1": var bpm = [1, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
                                                                         var oxy = [1, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
                                                                         break;
@@ -160,12 +166,13 @@
                                                     function displayGraph(day) {
                             
                                                         let [bpm, oxy] = dayChoice(day);
-                                                        //some error? Shouldnt happen but just incase
+                                                        //Shouldnt happen but just incase
                                                         if(bpm == 0) {
                                                             console.log("no choice yet");
                                                             return;
                                                         }
                             
+                                                        //Make chart area visible and code needed for Chart.js to function
                                                         document.getElementById("graphContainer").style.display = "block";
                                                         //bpm chart
                                                         const ctx1 = document.getElementById('bpmGraph');
@@ -214,7 +221,7 @@
                                                     }
                                                 </script></td>
                                             </tr>
-                                            <!--Graph area-->
+                                            <!--Graph area end-->
                                         </tbody>
                                     </table>
                                 </div>
