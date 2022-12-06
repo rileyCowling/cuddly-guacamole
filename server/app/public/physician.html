@@ -53,6 +53,8 @@
                                             <!--Test dynamic dropdown-->
                                             <script>
                                                 let numPatients = 4;    //replace with physicians patientList length
+                                                let newHeight = 1150 + (75*(numPatients-1));
+                                                document.getElementById("account").style.height = newHeight+"px";
                                                 let tableHTML = "";
                                                 //TODO once connected to recorded data
                                                 //replace "User ${i}" with physicians patientList[i] email[i]
