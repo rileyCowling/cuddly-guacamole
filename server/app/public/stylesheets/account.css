@@ -1,5 +1,5 @@
 #account {
-    background-color: #501b1d;  /*Content box 501b1d*/
+    background-color: #501b1d;  /*Content box*/
     color:#adadad;              /*text in above box*/
     margin:auto;
     width:50%;
@@ -37,7 +37,7 @@ h2 {
 }
 
 #summary {
-    background-color: #501b1d;  /*Content box 501b1d*/
+    background-color: #501b1d;  /*Content box*/
     color:#adadad;              /*text in above box*/
     margin:auto;
     width:50%;

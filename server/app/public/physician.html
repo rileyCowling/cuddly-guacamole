@@ -11,8 +11,7 @@
         <script src="./javascripts/script.js"></script>
         <script src="javascripts/physician.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   <!--Chart.js for graph displays-->
-
-        <!--3 script files are testing for drop down table-->
+        <!--3 script, 1 style files for drop down table-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -21,12 +20,12 @@
     <body>
         <div id="containerContent">
             <div id="banner">
+                <!--Navigation Bar-->
                 <div id="header">
                     <a href="index.html" id="header">Heart Rate Monitoring</a>
                 </div>
-                
                 <div id="links">
-                    <a href="reference.html">References</a> <!--TODO-->
+                    <a href="reference.html">References</a>
                     <a href="signup.html">Sign Up</a>
                     <a href="login.html">Login</a>
                     <a href="physician.html">My Account</a> <!--TODO, remove from home, sign up, login pages after made-->
@@ -39,6 +38,7 @@
                         <div class="col-md-10">
                             <div class="rounded">
                                 <div class="table-responsive table-borderless">
+                                    <!--Expandable table-->
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -50,16 +50,21 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody" class="table-body">
-                                            <!--Test dynamic dropdown-->
+                                            <!--Dynamic dropdown that has as many rows as the physician has patients-->
                                             <script>
-                                                let numPatients = 4;    //replace with physicians patientList length
-                                                let newHeight = 1150 + (75*(numPatients-1));
+                                                let numPatients = 4;    //TODO replace with physicians patientList length
+                                                let newHeight = 1150 + (75*(numPatients-1));    //adjust size of container so it fits all patients
                                                 document.getElementById("account").style.height = newHeight+"px";
                                                 let tableHTML = "";
                                                 //TODO once connected to recorded data
                                                 //replace "User ${i}" with physicians patientList[i] email[i]
                                                 //replace 3 bpm values with physicians patientList[i] avg, max, min
                                                 //make default of frequency drop down equal physicians patientList[i] frequency
+
+                                                //For each patient, add the following code into the table:
+                                                // A row for their average, max, min bpm
+                                                // A row for the physician to change the specific patients frequency of measurements
+                                                // A row for the physician to choose a day of the week for the patients two charts to be displayed
                                                 for (let i = 0; i < numPatients; i++) {
                                                     tableHTML += `<tr class="cell-1" data-toggle="collapse" data-target="#demo${i}">
                                                         <td class="text-center">User ${i}</td>
@@ -101,9 +106,10 @@
                                                 }
                                                 document.getElementById('tableBody').innerHTML = tableHTML;
                                             </script>
-                                            <!--Test dynamic dropdown-->
+                                            <!--Dynamic dropdown end-->
                                             
-                                            <!--Graph area-->
+                                            <!--Graph area, two rows for reset button and for charts-->
+                                            <!--Charts use essentially the same code as in the account.html script-->
                                             <tr class="cell-2">
                                                 <td colspan="5"><button id="resetGraph">Clear Graphs</button></td>
                                             </tr>
@@ -126,31 +132,31 @@
                                                         }
                                                     }
                         
-                                                    //Cannot get function to work in account.js, moved directly into account.html
-                                                    //Chooses the data for a given day (from dropdown) Assuming bpm (and other needed values are formated like this)
+                                                    //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
                                                     function dayChoice(day) {
                                                         switch(day) {
                                                             //bpm value, oxy percent;
-                                                            case "1": var bpm = [1, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [1, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
-                                                                        break;
-                                                            case "2": var bpm = [2, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [2, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
-                                                                        break;
-                                                            case "3": var bpm = [3, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [3, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
-                                                                        break;
-                                                            case "4": var bpm = [4, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [4, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
-                                                                        break;
-                                                            case "5": var bpm = [5, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [5, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
-                                                                        break;
-                                                            case "6": var bpm = [6, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [6, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
-                                                                        break;
-                                                            case "7": var bpm = [7, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]; 
-                                                                        var oxy = [7, 80, 90, 70, 60, 78, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70];
+                                                            //TODO replace set values with patient values
+                                                            case "1": var bpm = [82, 84, 83, , , , , , , , , , , 62, 66, 64, 52, 59, 70, 68, 59, 54, 57, 60]; 
+                                                                    var oxy = [95, 95, 96, , , , , , , , , , , 98, 99, 97, 98, 99, 100, 100, 97, 97, 98, 99];
+                                                                    break;
+                                                            case "2": var bpm = [55, 54, 100, , , , , , , , , , , , , , 69, 57, 68, 64, 58, 62, 67]; 
+                                                                    var oxy = [95, 95, 100, , , , , , , , , , , , , , 97, 94, 95, 97, 95, 98, 97];
+                                                                    break;
+                                                            case "3": var bpm = [59, 58, , , , , , , , , , , , , 75, 88, 90, 80, 72, 54, 53, 93, 93, 67]; 
+                                                                    var oxy = [97, 95, , , , , , , , , , , , , 96, 98, 97, 98, 96, 100, 97, 95, 94, 96];
+                                                                    break;
+                                                            case "4": var bpm = [63, 62, 90, , , , , , , , , , 64, 62, 63, 54, 70, 72, 67, 64, 53, 57, 60, 67]; 
+                                                                    var oxy = [94, 94, 96, , , , , , , , , , 93, 99, 100, 100, 97, 96, 96, 95, 94, 97, 94, 99];
+                                                                    break;
+                                                            case "5": var bpm = [54, 63, 90, , , , , , , 82, 86, 71, 68, 67, 70, 74, 81, , , , 79, 83, 86, 93]; 
+                                                                    var oxy = [95, 95, 96, , , , , , , 100, 98, 97, 96, 96, 98, 97, 98, , , , 97, 96, 98, 99];
+                                                                    break;
+                                                            case "6": var bpm = [ , , , , , , , 82, 85, 86, 73, 98, 88, 86, 82, 76, 74, 71, 70, 67, 53, 56, 61, ]; 
+                                                                    var oxy = [ , , , , , , , 100, 100, 99, 99, 98, 97, 98, 99, 97, 98, 96, 97, 96, 97, 97, 98, ];
+                                                                    break;
+                                                            case "7": var bpm = [ , , , , , , , , 70, 69, 65, 74, 73, 78, 83, 88, 87, 90, 92, 93, 66, 62, , ]; 
+                                                                    var oxy = [ , , , , , , , , 99, 98, 99, 97, 97, 97, 99, 98, 98, 99, 99, 100, 99, 99, , ];
                                                                         break;
                                                             default: var bpm = 0; oxy = 0; break;
                                                         }
@@ -160,12 +166,13 @@
                                                     function displayGraph(day) {
                             
                                                         let [bpm, oxy] = dayChoice(day);
-                                                        //some error? Shouldnt happen but just incase
+                                                        //Shouldnt happen but just incase
                                                         if(bpm == 0) {
                                                             console.log("no choice yet");
                                                             return;
                                                         }
                             
+                                                        //Make chart area visible and code needed for Chart.js to function
                                                         document.getElementById("graphContainer").style.display = "block";
                                                         //bpm chart
                                                         const ctx1 = document.getElementById('bpmGraph');
@@ -184,7 +191,7 @@
                                                                 maintainAspectRatio: false,
                                                                 scales: {
                                                                     y: {
-                                                                        beginAtZero: true
+                                                                        beginAtZero: false
                                                                     }
                                                                 }
                                                             }
@@ -206,7 +213,7 @@
                                                                 maintainAspectRatio: false,
                                                                 scales: {
                                                                     y: {
-                                                                        beginAtZero: true
+                                                                        beginAtZero: false
                                                                     }
                                                                 }
                                                             }
@@ -214,7 +221,7 @@
                                                     }
                                                 </script></td>
                                             </tr>
-                                            <!--Graph area-->
+                                            <!--Graph area end-->
                                         </tbody>
                                     </table>
                                 </div>

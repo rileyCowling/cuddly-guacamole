@@ -14,11 +14,12 @@
     <body>
         <div id="containerContent">
             <div id="banner">
+                <!--Navigation Bar-->
 				<div id="header">
 					<a href="index.html" id="header">Heart Rate Monitoring</a>
 				</div>
                 <div id="links">
-                    <a href="reference.html">References</a> <!--TODO-->
+                    <a href="reference.html">References</a>
                     <a href="signup.html">Sign Up</a>
                     <a href="login.html">Login</a>
                     <a href="account.html">My&nbspAccount</a> <!--TODO, remove from home, sign up, login pages after made-->
@@ -29,12 +30,14 @@
                 <h1>Sign Up</h1>
                 <div id="userLogin">
                     <div class="dataForm">
+                        <!--Select if user is a patient of physician-->
                         <label for="user">User:</label>
                         <select name="user" class="dataForm" id="user" >
                         <option value="Patient">Patient</option>
                         <option value="Physician">Physician</option>
                         </select>
                     </div>
+                    <!--Enter email and password for account, sign up button to check if valid info and other checks (in signup.js)-->
                     <div class="dataForm">
                         <label for="email">Email:</label>
                         <input type="text" id="email" placeholder="Enter Email" name="email">
