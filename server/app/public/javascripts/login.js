@@ -26,7 +26,10 @@ function login() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) {
-            console.log(jqXHR.JSON);
+            alert("Here is a token being put into local Storage: " + data.token);
+            window.localStorage.setItem("token",data.token);
+            //Lets just work with an ID for now
+            
             window.location.replace("account.html");
         })        // Success
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -45,7 +48,7 @@ function login() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) { // Success
-            console.log(data);
+            //console.log(data);
             window.location.replace("physician.html");
         })     
         .fail(function (jqXHR, textStatus, errorThrown) {

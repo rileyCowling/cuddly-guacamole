@@ -3,12 +3,16 @@
 //x axis - time of day
 //y axis - values
 //also show min and max
+function test(){
+    
+}
+
+$('#saveChanges').onClick(test);
 
 
 
 
 /* 
-
 
 //Cannot get function to work in account.js, moved directly into account.html
 //Displays the daily view graphs

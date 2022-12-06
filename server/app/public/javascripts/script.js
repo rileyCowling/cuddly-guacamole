@@ -7,3 +7,4 @@ function scrollFunction() {
    } 
  }
  window.onscroll = scrollFunction;
+
