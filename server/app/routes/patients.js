@@ -68,24 +68,24 @@ router.post("/dataEntry", function (req, res) {
     console.log(req.body.data);
     res.status(200).json("{ message: recieved}")
     
-    // Patient.findOne({ id: req.body.id }, function (err, patient) {
-    //     if (err) {
-    //         res.status(400).send(err);
-    //     }
-    //     else if (!patient) {
-    //         // ID not in the database
-    //         res.status(401).json({ error: "Could not find ID!!" });
-    //     }
-    //     else {
+    Patient.findOne({ id: req.body.id }, function (err, patient) {
+        if (err) {
+            res.status(400).send(err);
+        }
+        else if (!patient) {
+            // ID not in the database
+            res.status(401).json({ error: "Could not find ID!!" });
+        }
+        else {
             
-    //         //save the data to the arrays
-    //         patient.bpm.push(req.body.heartRate);
-    //         patient.oxy.push(req.body.spo2);
-    //         patient.save();
-    //         let msgStr = `Recieved: Heart Rate (${req.body.heartRate})BPM, SPO2 = (${req.body.spo2})%`;
-    //         res.status(201).json({ message: msgStr });
-    //     }
-    // });
+            //save the data to the arrays
+            // patient.bpm.push(req.body.heartRate);
+            // patient.oxy.push(req.body.spo2);
+            // patient.save();
+            console.log(req.body.data);
+            res.status(200).json("{ message: recieved}")
+        }
+    });
 });
 
 

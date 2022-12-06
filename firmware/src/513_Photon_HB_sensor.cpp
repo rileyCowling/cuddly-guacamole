@@ -122,17 +122,7 @@ void loop(){
     rangeSetter=true; 
     digitalWrite(W_LED,LOW);
     //calculate heart rate and SpO2 after first 100 samples (first 4 seconds of samples)
-    maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
-    //** DATA PRINTING **//
-    //Heart Rate Values
-    Serial.print(F("HR= "));
-    Serial.print(heartRate, DEC);
-    Serial.print(F(" BPM"));
-    //Blood Oxygen Values 
-    Serial.print(F(", SPO2= "));
-    Serial.print(spo2, DEC);
-    Serial.print(F("%"));
-    Serial.println();  
+    maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate); 
   }
   
   //Continuously taking samples from MAX30102.  Heart rate and SpO2 are calculated every 1 second
@@ -176,12 +166,15 @@ void loop(){
   delay(200);
   digitalWrite(W_LED,LOW);
 
+  Time.zone(-7);
+  String time = Time.timeStr();
+
   //Webhook for sending data to the server
   String data1 = String(heartRate);
   String data2 = String(spo2);
-  String data = "{\"heartRate\": " + data1 + ", " + "\"spo2\": " + data2 + "}";
+  String data = "{ \"time\": " + time + ", \"heartRate\": " + data1 + ", " + "\"spo2\": " + data2 + "}";
   Particle.publish("dataEntry", data, PRIVATE);
-  
+  //LED to let you know the data was sent
   digitalWrite(W_LED,HIGH);
   delay(200);
   digitalWrite(W_LED,LOW);
