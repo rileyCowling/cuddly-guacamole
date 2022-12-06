@@ -25,10 +25,10 @@ function login() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) {
-            alert("Here is a token being put into local Storage: " + data.token);
+            //Storing the generated token in local storage
             window.localStorage.setItem("token",data.token);
             //Lets just work with an ID for now
-            
+            window.localStorage.setItem("id",data.id);
             window.location.replace("account.html");
         })        // Success
         .fail(function (jqXHR, textStatus, errorThrown) {

@@ -35,6 +35,9 @@ button, select, option, input {
 h2 {
     font-size: 25px;
 }
+h3{
+    color: red;
+}
 
 #summary {
     background-color: #501b1d;  /*Content box*/

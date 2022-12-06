@@ -65,7 +65,7 @@ router.post("/login", function (req, res) {
           if (bcrypt.compareSync(req.body.password, patient.password)) {
               const token = jwt.encode({ email: patient.email }, secret);
               // Send back a token that contains the user's username
-              res.status(201).json({ success: true, token: token, msg: "Login success" });
+              res.status(201).json({ success: true, token: token, id: patient.id, msg: "Login success" });
           }
           else {
               res.status(401).json({ success: false, msg: "Email or password invalid." });
@@ -97,6 +97,37 @@ router.post("/dataEntry", function (req, res) {
         }
     });
 });
+
+
+router.get("/home", function (req, res) {
+    console.log("recieved");
+    // See if the X-Auth header is set
+    if (!req.headers["x-auth"]) {
+        return res.status(401).json({ success: false, msg: "Missing X-Auth header" });
+    }
+ 
+    // X-Auth should contain the token 
+    const token = req.headers["x-auth"];
+    try {
+        const decoded = jwt.decode(token, secret);
+        // Send back email and last access
+        Patient.findOne({ email: decoded.email  }, function (err, patient) {
+            if (err) {
+                res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
+            }
+            else {
+                console.log(patient.email);
+                res.status(200).json({ success: true, email: patient.email, id: patient.id, message: "success" });
+            }
+        });
+    }
+    catch (ex) {
+        res.status(401).json({ success: false, message: "Invalid JWT" });
+    }
+ });
+
+ 
+ 
 
 
 module.exports = router;

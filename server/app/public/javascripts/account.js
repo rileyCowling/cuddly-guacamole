@@ -3,13 +3,32 @@
 //x axis - time of day
 //y axis - values
 //also show min and max
-function test(){
+//var Patient = require("../models/patient");
+
+
+$(function(){
+    $.ajax({
+        url: '/patients/home',
+        method: 'GET',
+        headers: { 'x-auth' : window.localStorage.getItem("token") },
+        //body: {'id': 'd2096866-acca-4be1-a201-ac79bdb773d5'},
+        dataType: 'json'
+    })
+    .done(function (data, textStatus, jqXHR) {
+        $("h1").prepend(data.email + "'s ");
+        $("h1").after('<h3> ID#: ' +  data.id  + '</h3>');
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+        //window.location.replace("login.html");
+    })
     
-}
-
-$('#saveChanges').onClick(test);
 
 
+    
+
+
+
+});
 
 
 /* 
