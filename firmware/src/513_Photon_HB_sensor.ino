@@ -139,7 +139,7 @@ void loop(){
   String time = Time.timeStr();
   String data1 = String(heartRate);
   String data2 = String(spo2);
-  String data = "{ \"time\": " + time + ", \"heartRate\": " + data1 + ", " + "\"spo2\": " + data2 + "}";
+  String data = "{ \"time\": \"" + time + "\", \"heartRate\": " + data1 + ", " + "\"spo2\": " + data2 + "}";
   Particle.publish("dataEntry", data, PRIVATE); //Webhook for sending data to the server
   //LED to let you know the data was sent
   digitalWrite(W_LED,HIGH);
