@@ -1,6 +1,8 @@
+/**** Main Account Page For Patients ****/
+
 //Wait for document ready
 $(function(){
-    //initial setup of account page to make page unique to user
+    //**** initial setup of account page to make page unique to user
     $.ajax({
         url: '/patients/home',
         method: 'GET',
@@ -34,16 +36,18 @@ $(function(){
         $("#max").html('Maximum - ' + max + ' bpm');
         $("#min").html('Minimum - ' + min + 'bpm');
         $("#avg").html('Minimum - ' + avg + 'bpm');
+        if(data.physician != null){
+            $("#default").html("Physician " + data.physician);
+        }
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         window.location.replace("login.html");
     })
     
-    /**** Button Handlers  ****/
-
-    //Taking care of Change Password Button
+    //**** Taking care of Change Password Button
     $("#newPasswordButton").click(function(){
-        //Uncomment Below!!!
+        
+        //** Uncomment Below!!! **//
 
         // // Strong Password Check
         // var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
@@ -55,7 +59,7 @@ $(function(){
         //     return false;
         // }
         
-        //Create datacfrom text input
+        //Create data from text input
         let txdata = {
             password: $("#newPassword").val()
         }
@@ -71,22 +75,22 @@ $(function(){
         .done(function (data, textStatus, jqXHR) {
             window.alert("Password Has Been Changed");
             window.location.replace("account.html");
-        })          // Success
+        })          
         .fail(function (jqXHR, textStatus, errorThrown) {
             if(jqXHR.status == 401){
                 window.alert("Password Change Failed");
-                //location.reload();
+                window.location.replace("account.html");
             } 
         });
     });  
     
-    //Taking care of the log out process
+    //**** Taking care of the log out process
     $("#logoutButton").click(function(){
         window.localStorage.removeItem("token");
         window.location.replace("index.html");
     });
 
-    //Choosing your physician
+    //**** Choosing your physician
     $.ajax({
         url: '/physicians/list',
         method: 'GET',
@@ -96,25 +100,26 @@ $(function(){
         //window.alert(dataStr);
         let dataObj = JSON.parse(dataStr);
         //window.alert(dataObj[0].email);
-        let numPhysicians = Object.keys(dataObj).length;;  //replace with physicians length
+        let numPhysicians = Object.keys(dataObj).length;  //replace with physicians length
         let physicianHTML = "";
         //TODO once connected to recorded data
         //replace "Physician ${i}" with physicians[i] email
         for(let i = 0; i < numPhysicians; i++) {
-            physicianHTML += `<option value="${i}" >Physician ${dataObj[i].email}</option>`;
+            physicianHTML += `<option value="${dataObj[i].email}" >Physician ${dataObj[i].email}</option>`;
         }
         document.getElementById("yourPhysician").innerHTML += physicianHTML;
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
             //window.location.replace("login.html");
     })
-
+    //This happens once the dropdown selection is changed
     $('#yourPhysician').change(function(){
         let txdata = {
             physician: $('#yourPhysician').val()
         }
         
-        //Ajax Call that will let us put the physician in the patients DB and the patient in the physician DB
+        //Ajax Call that will let us put the physician in the patients 
+        //DB and the patient in the physician DB
         $.ajax({
             url: '/patients/selectPhysician',
             method: 'POST',
@@ -124,7 +129,7 @@ $(function(){
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) {
-            window.alert("Physician Has been selected");
+            window.alert("You have selected " + $('#yourPhysician').val() + " to be your doctor!");
             
         })          // Success
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -137,14 +142,12 @@ $(function(){
     });
         
     
-        
 
-
-    //Device Registration & Removal (IDK if removal will be implemented)
+    //**** Device Registration & Removal (IDK if removal will be implemented)
 
 
 
-    //Time of Day and Frequency 
+    //**** Time of Day and Frequency 
    
 
 

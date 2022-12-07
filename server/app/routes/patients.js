@@ -2,10 +2,14 @@
 /*
     This file is going to be managing all POST and GET requests that relate to the patients
     
-    TODO
-    - 
-    -
-    -
+
+    TODO 
+    cant get the graphs to display for individual users
+
+    Style for users right now
+    user# pw#
+    dr# pw#
+
 */
 
 //Declarations
@@ -17,6 +21,7 @@ const bcrypt = require("bcryptjs");
 const fs = require('fs');
 const uuid = require('uuid');
 const { json } = require('express');
+const Physician = require('../models/physician');
 const secret = fs.readFileSync(__dirname + '/../keys/jwtkey').toString();
 
 //SIGN UP A NEW PATIENT
@@ -101,8 +106,9 @@ router.post("/dataEntry", function (req, res) {
 });
 
 
+
 router.get("/home", function (req, res) {
-    console.log("recieved");
+    //console.log("recieved"); //TESTING
     // See if the X-Auth header is set
     if (!req.headers["x-auth"]) {
         return res.status(401).json({ success: false, msg: "Missing X-Auth header" });
@@ -118,8 +124,8 @@ router.get("/home", function (req, res) {
                 res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
             }
             else {
-                console.log(patient.email);
-                res.status(200).json({ success: true, email: patient.email, id: patient.id, bpm: patient.bpm, oxy: patient.oxy, message: "success" });
+                //console.log(patient.email);
+                res.status(200).json({ success: true, email: patient.email, id: patient.id, physician: patient.physician, bpm: patient.bpm, oxy: patient.oxy, message: "success" });
             }
         });
     }
@@ -164,20 +170,61 @@ router.get("/home", function (req, res) {
     const token = req.headers["x-auth"];
     try {
         const decoded = jwt.decode(token, secret);
-        // Send back email and last access
-        Patient.findOneAndUpdate({ email: decoded.email  }, {physician: req.body.physician}, function (err, patient) {
+        const filter = {email: decoded.email};
+        const update = {physician: req.body.physician};
+        console.log(req.body.physician);
+        Patient.findOneAndUpdate(filter, update, function (err, patient) {
             if (err) {
                 res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
             }
             else {
-                res.status(201).json({ success: true, physician: "name" , message: "Physician Selection Success" });
+                //console.log(patient.physician);
+                //res.status(201).json({ success: true, physician: req.body.physician, message: "Physician Selection Success" });
+                Physician.findOne({email: req.body.physician}, function(err,physician){
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                    else if (!physician) {
+                        // ID not in the database
+                        let msgStr = 'error: "Could not find physician!!"';
+                        res.status(401).json({msgStr});
+                        console.log(msgStr);
+                    }
+                    else {
+                        
+                        //save the patient to the physician's arrays
+                        if(!physician.patients.includes(patient.email)){
+                            physician.patients.push(patient.email);
+                            physician.save();
+                        }
+                        res.status(200).json({message: "recieved"});
+                        console.log(physician.patients);
+                    }
+                })
+                
             }
         });
+        
     }
     catch (ex) {
         res.status(401).json({ success: false, message: "Invalid JWT" });
     }
- })
+ });
 
+ // physician uses this to get patient summaries
+ router.post("/data", function (req, res) {
+    //console.log("recieved"); //TESTING
+    
+        Patient.findOne({email: req.body.email}, function (err, patient) {
+            if (err) {
+                res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
+            }
+            else {
+                //console.log(patient.email);
+                res.status(200).json({ success: true, patientObj: patient, message: "success" });
+            }
+        });
+    
+ });
 
 module.exports = router;

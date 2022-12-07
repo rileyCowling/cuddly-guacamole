@@ -52,59 +52,76 @@
                                         <tbody id="tableBody" class="table-body">
                                             <!--Dynamic dropdown that has as many rows as the physician has patients-->
                                             <script>
-                                                let numPatients = 4;    //TODO replace with physicians patientList length
-                                                let newHeight = 1150 + (75*(numPatients-1));    //adjust size of container so it fits all patients
-                                                document.getElementById("account").style.height = newHeight+"px";
-                                                let tableHTML = "";
-                                                //TODO once connected to recorded data
-                                                //replace "User ${i}" with physicians patientList[i] email[i]
-                                                //replace 3 bpm values with physicians patientList[i] avg, max, min
-                                                //make default of frequency drop down equal physicians patientList[i] frequency
+                                               
+                                                $(function(){
+                                                    $.ajax({
+                                                        url: '/physicians/home',
+                                                        method: 'GET',
+                                                        headers: { 'x-auth' : window.localStorage.getItem("token") },
+                                                        //body: {'id': 'd2096866-acca-4be1-a201-ac79bdb773d5'},
+                                                        dataType: 'json'
+                                                    })
+                                                    .done(function (data, textStatus, jqXHR) {
+                                                        $("h2").html(data.email + "'s Patient Summary");
 
-                                                //For each patient, add the following code into the table:
-                                                // A row for their average, max, min bpm
-                                                // A row for the physician to change the specific patients frequency of measurements
-                                                // A row for the physician to choose a day of the week for the patients two charts to be displayed
-                                                for (let i = 0; i < numPatients; i++) {
-                                                    tableHTML += `<tr class="cell-1" data-toggle="collapse" data-target="#demo${i}">
-                                                        <td class="text-center">User ${i}</td>
-                                                        <td>82 bpm</td>
-                                                        <td>97 bpm</td>
-                                                        <td>68 bpm</td>
-                                                        <td class="table-elipse" data-toggle="collapse" data-target="#demo${i}"><i class="fa fa-ellipsis-h text-black-50"></i></td>
-                                                    </tr>
-                                                    <tr id="demo${i}" class="collapse cell-2 row-child">
-                                                        <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                        <td colspan="1">Frequency of measurements</td>
-                                                        <td colspan="1"><select name="frequency" id="frequency">
-                                                            <option value="0">Once every 5 minutes</option>
-                                                            <option value="1">Once every 10 minutes</option>
-                                                            <option value="2">Once every 30 minutes</option>
-                                                            <option value="3">Once every hour</option>
-                                                            <option value="4">Once every 2 hours</option>
-                                                            <option value="5">Once every 4 hours</option>
-                                                            <option value="6">Once every 6 hours</option>
-                                                            <option value="7">Once every 12 hours</option>
-                                                        </select></td>
-                                                        <td colspan="2"><button id="measurements" class="info">Save Changes</button></td>
-                                                    </tr>
-                                                    <tr id="demo${i}" class="collapse cell-2 row-child">
-                                                        <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                                                        <td colspan="1">Select a day of the week:</td>
-                                                        <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
-                                                            <option id="selectDay" selected=true disabled>Select</option>
-                                                            <option value="1">Monday</option>
-                                                            <option value="2">Tuesday</option>
-                                                            <option value="3">Wednesday</option>
-                                                            <option value="4">Thursday</option>
-                                                            <option value="5">Friday</option>
-                                                            <option value="6">Saturday</option>
-                                                            <option value="7">Sunday</option>
-                                                        </select></td>
-                                                        <td colspan="2"></td>
-                                                    </tr>`
-                                                }
-                                                document.getElementById('tableBody').innerHTML = tableHTML;
+                                                        let patients = data.patients;
+                                                        let numPatients = patients.length;    //TODO replace with physicians patientList length
+                                                        let newHeight = 1150 + (75*(numPatients-1));    //adjust size of container so it fits all patients
+                                                        document.getElementById("account").style.height = newHeight+"px";
+                                                        let tableHTML = "";
+                                                        //TODO once connected to recorded data
+                                                        //replace "User ${i}" with physicians patientList[i] email[i]
+                                                        //replace 3 bpm values with physicians patientList[i] avg, max, min
+                                                        //make default of frequency drop down equal physicians patientList[i] frequency
+
+                                                        //For each patient, add the following code into the table:
+                                                        // A row for their average, max, min bpm
+                                                        // A row for the physician to change the specific patients frequency of measurements
+                                                        // A row for the physician to choose a day of the week for the patients two charts to be displayed
+                                                        for (let i = 0; i < numPatients; i++) {
+                                                            
+                                                            tableHTML += `<tr class="cell-1" data-toggle="collapse" data-target="#demo${i}">
+                                                                    <td class="text-center">${patients[i]}</td>
+                                                                    <td>82 bpm</td>
+                                                                    <td>97 bpm</td>
+                                                                    <td>68 bpm</td>
+                                                                    <td class="table-elipse" data-toggle="collapse" data-target="#demo${i}"><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                                                </tr>
+                                                                <tr id="demo${i}" class="collapse cell-2 row-child">
+                                                                    <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                                    <td colspan="1">Frequency of measurements</td>
+                                                                    <td colspan="1"><select name="frequency" id="frequency">
+                                                                        <option value="0">Once every 5 minutes</option>
+                                                                        <option value="1">Once every 10 minutes</option>
+                                                                        <option value="2">Once every 30 minutes</option>
+                                                                        <option value="3">Once every hour</option>
+                                                                        <option value="4">Once every 2 hours</option>
+                                                                        <option value="5">Once every 4 hours</option>
+                                                                        <option value="6">Once every 6 hours</option>
+                                                                        <option value="7">Once every 12 hours</option>
+                                                                    </select></td>
+                                                                    <td colspan="2"><button id="measurements" class="info">Save Changes</button></td>
+                                                                </tr>
+                                                                <tr id="demo${i}" class="collapse cell-2 row-child">
+                                                                    <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                                    <td colspan="1">Select a day of the week:</td>
+                                                                    <td colspan="1"><select name="day" class="day" onchange="displayGraph(this.options[this.selectedIndex].value)">
+                                                                        <option id="selectDay" selected=true disabled>Select</option>
+                                                                        <option value="1">Monday</option>
+                                                                        <option value="2">Tuesday</option>
+                                                                        <option value="3">Wednesday</option>
+                                                                        <option value="4">Thursday</option>
+                                                                        <option value="5">Friday</option>
+                                                                        <option value="6">Saturday</option>
+                                                                        <option value="7">Sunday</option>
+                                                                    </select></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>`
+                                                        
+                                                        }
+                                                        document.getElementById('tableBody').innerHTML = tableHTML;
+                                                    })
+                                                });
                                             </script>
                                             <!--Dynamic dropdown end-->
                                             
@@ -120,111 +137,115 @@
                                                     </div>
                                                 
                                                 <script>
-                                                    var bpmChart;
-                                                    var oxyChart;
+                                                        
+                                                        // var bpmChart;
+                                                        // var oxyChart;
+                                                        
+                                                        // document.getElementById("resetGraph").onclick = function() {
+                                                        //     bpmChart.destroy();
+                                                        //     oxyChart.destroy();
+                                                        //     var days = document.getElementsByClassName("day");
+                                                        //     for(let i = 0; i < days.length; i++) {
+                                                        //         days[i].selectedIndex = 0;
+                                                        //     }
+                                                        // }
+                            
+                                                        // //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
+                                                        // function dayChoice(day) {
+                                                        //     switch(day) {
+                                                        //         //bpm value, oxy percent;
+                                                        //         //TODO replace set values with patient values
+                                                        //         case "1": var bpm = [82, 84, 83, , , , , , , , , , , 62, 66, 64, 52, 59, 70, 68, 59, 54, 57, 60]; 
+                                                        //                 var oxy = [95, 95, 96, , , , , , , , , , , 98, 99, 97, 98, 99, 100, 100, 97, 97, 98, 99];
+                                                        //                 break;
+                                                        //         case "2": var bpm = [55, 54, 100, , , , , , , , , , , , , , 69, 57, 68, 64, 58, 62, 67]; 
+                                                        //                 var oxy = [95, 95, 100, , , , , , , , , , , , , , 97, 94, 95, 97, 95, 98, 97];
+                                                        //                 break;
+                                                        //         case "3": var bpm = [59, 58, , , , , , , , , , , , , 75, 88, 90, 80, 72, 54, 53, 93, 93, 67]; 
+                                                        //                 var oxy = [97, 95, , , , , , , , , , , , , 96, 98, 97, 98, 96, 100, 97, 95, 94, 96];
+                                                        //                 break;
+                                                        //         case "4": var bpm = [63, 62, 90, , , , , , , , , , 64, 62, 63, 54, 70, 72, 67, 64, 53, 57, 60, 67]; 
+                                                        //                 var oxy = [94, 94, 96, , , , , , , , , , 93, 99, 100, 100, 97, 96, 96, 95, 94, 97, 94, 99];
+                                                        //                 break;
+                                                        //         case "5": var bpm = [54, 63, 90, , , , , , , 82, 86, 71, 68, 67, 70, 74, 81, , , , 79, 83, 86, 93]; 
+                                                        //                 var oxy = [95, 95, 96, , , , , , , 100, 98, 97, 96, 96, 98, 97, 98, , , , 97, 96, 98, 99];
+                                                        //                 break;
+                                                        //         case "6": var bpm = [ , , , , , , , 82, 85, 86, 73, 98, 88, 86, 82, 76, 74, 71, 70, 67, 53, 56, 61, ]; 
+                                                        //                 var oxy = [ , , , , , , , 100, 100, 99, 99, 98, 97, 98, 99, 97, 98, 96, 97, 96, 97, 97, 98, ];
+                                                        //                 break;
+                                                        //         case "7": var bpm = [ , , , , , , , , 70, 69, 65, 74, 73, 78, 83, 88, 87, 90, 92, 93, 66, 62, , ]; 
+                                                        //                 var oxy = [ , , , , , , , , 99, 98, 99, 97, 97, 97, 99, 98, 98, 99, 99, 100, 99, 99, , ];
+                                                        //                     break;
+                                                        //         default: var bpm = 0; oxy = 0; break;
+                                                        //     }
+                                                        //     return [bpm, oxy];
+                                                        // }
+                                                        // //displays daily view graph for a given day (from dropdown)
+                                                        // function displayGraph(day) {
+                                
+                                                        //     let [bpm, oxy] = dayChoice(day);
+                                                        //     //Shouldnt happen but just incase
+                                                        //     if(bpm == 0) {
+                                                        //         console.log("no choice yet");
+                                                        //         return;
+                                                        //     }
+                                
+                                                        //     //Make chart area visible and code needed for Chart.js to function
+                                                        //     document.getElementById("graphContainer").style.display = "block";
+                                                        //     //bpm chart
+                                                        //     const ctx1 = document.getElementById('bpmGraph');
+                                                        //     bpmChart = new Chart(ctx1, {
+                                                        //         type: 'line',
+                                                        //         data: {
+                                                        //             //can be replaced with times/values from board
+                                                        //             labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
+                                                        //             datasets: [{
+                                                        //                 label: 'Heart Rate',
+                                                        //                 data: bpm,
+                                                        //                 borderWidth: 1
+                                                        //             }]
+                                                        //         },
+                                                        //         options: {
+                                                        //             maintainAspectRatio: false,
+                                                        //             scales: {
+                                                        //                 y: {
+                                                        //                     beginAtZero: false
+                                                        //                 }
+                                                        //             }
+                                                        //         }
+                                                        //     });
+                                                        //     //oxy chart
+                                                        //     const ctx2 = document.getElementById('oxyGraph');
+                                                        //     oxyChart = new Chart(ctx2, {
+                                                        //         type: 'line',
+                                                        //         data: {
+                                                        //             //can be replaced with times/values from board
+                                                        //             labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
+                                                        //             datasets: [{
+                                                        //                 label: 'Oxygen Saturation',
+                                                        //                 data: oxy,
+                                                        //                 borderWidth: 1
+                                                        //             }]
+                                                        //         },
+                                                        //         options: {
+                                                        //             maintainAspectRatio: false,
+                                                        //             scales: {
+                                                        //                 y: {
+                                                        //                     beginAtZero: false
+                                                        //                 }
+                                                        //             }
+                                                        //         }
+                                                        //     });
+                                                        // }
                                                     
-                                                    document.getElementById("resetGraph").onclick = function() {
-                                                        bpmChart.destroy();
-                                                        oxyChart.destroy();
-                                                        var days = document.getElementsByClassName("day");
-                                                        for(let i = 0; i < days.length; i++) {
-                                                            days[i].selectedIndex = 0;
-                                                        }
-                                                    }
-                        
-                                                    //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
-                                                    function dayChoice(day) {
-                                                        switch(day) {
-                                                            //bpm value, oxy percent;
-                                                            //TODO replace set values with patient values
-                                                            case "1": var bpm = [82, 84, 83, , , , , , , , , , , 62, 66, 64, 52, 59, 70, 68, 59, 54, 57, 60]; 
-                                                                    var oxy = [95, 95, 96, , , , , , , , , , , 98, 99, 97, 98, 99, 100, 100, 97, 97, 98, 99];
-                                                                    break;
-                                                            case "2": var bpm = [55, 54, 100, , , , , , , , , , , , , , 69, 57, 68, 64, 58, 62, 67]; 
-                                                                    var oxy = [95, 95, 100, , , , , , , , , , , , , , 97, 94, 95, 97, 95, 98, 97];
-                                                                    break;
-                                                            case "3": var bpm = [59, 58, , , , , , , , , , , , , 75, 88, 90, 80, 72, 54, 53, 93, 93, 67]; 
-                                                                    var oxy = [97, 95, , , , , , , , , , , , , 96, 98, 97, 98, 96, 100, 97, 95, 94, 96];
-                                                                    break;
-                                                            case "4": var bpm = [63, 62, 90, , , , , , , , , , 64, 62, 63, 54, 70, 72, 67, 64, 53, 57, 60, 67]; 
-                                                                    var oxy = [94, 94, 96, , , , , , , , , , 93, 99, 100, 100, 97, 96, 96, 95, 94, 97, 94, 99];
-                                                                    break;
-                                                            case "5": var bpm = [54, 63, 90, , , , , , , 82, 86, 71, 68, 67, 70, 74, 81, , , , 79, 83, 86, 93]; 
-                                                                    var oxy = [95, 95, 96, , , , , , , 100, 98, 97, 96, 96, 98, 97, 98, , , , 97, 96, 98, 99];
-                                                                    break;
-                                                            case "6": var bpm = [ , , , , , , , 82, 85, 86, 73, 98, 88, 86, 82, 76, 74, 71, 70, 67, 53, 56, 61, ]; 
-                                                                    var oxy = [ , , , , , , , 100, 100, 99, 99, 98, 97, 98, 99, 97, 98, 96, 97, 96, 97, 97, 98, ];
-                                                                    break;
-                                                            case "7": var bpm = [ , , , , , , , , 70, 69, 65, 74, 73, 78, 83, 88, 87, 90, 92, 93, 66, 62, , ]; 
-                                                                    var oxy = [ , , , , , , , , 99, 98, 99, 97, 97, 97, 99, 98, 98, 99, 99, 100, 99, 99, , ];
-                                                                        break;
-                                                            default: var bpm = 0; oxy = 0; break;
-                                                        }
-                                                        return [bpm, oxy];
-                                                    }
-                                                    //displays daily view graph for a given day (from dropdown)
-                                                    function displayGraph(day) {
-                            
-                                                        let [bpm, oxy] = dayChoice(day);
-                                                        //Shouldnt happen but just incase
-                                                        if(bpm == 0) {
-                                                            console.log("no choice yet");
-                                                            return;
-                                                        }
-                            
-                                                        //Make chart area visible and code needed for Chart.js to function
-                                                        document.getElementById("graphContainer").style.display = "block";
-                                                        //bpm chart
-                                                        const ctx1 = document.getElementById('bpmGraph');
-                                                        bpmChart = new Chart(ctx1, {
-                                                            type: 'line',
-                                                            data: {
-                                                                //can be replaced with times/values from board
-                                                                labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
-                                                                datasets: [{
-                                                                    label: 'Heart Rate',
-                                                                    data: bpm,
-                                                                    borderWidth: 1
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                maintainAspectRatio: false,
-                                                                scales: {
-                                                                    y: {
-                                                                        beginAtZero: false
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                        //oxy chart
-                                                        const ctx2 = document.getElementById('oxyGraph');
-                                                        oxyChart = new Chart(ctx2, {
-                                                            type: 'line',
-                                                            data: {
-                                                                //can be replaced with times/values from board
-                                                                labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
-                                                                datasets: [{
-                                                                    label: 'Oxygen Saturation',
-                                                                    data: oxy,
-                                                                    borderWidth: 1
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                maintainAspectRatio: false,
-                                                                scales: {
-                                                                    y: {
-                                                                        beginAtZero: false
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                    }
+                                                    
                                                 </script></td>
                                             </tr>
                                             <!--Graph area end-->
                                         </tbody>
                                     </table>
                                 </div>
+                                <button id="logoutButton">Logout</button>
                             </div>
                         </div>
                     </div>

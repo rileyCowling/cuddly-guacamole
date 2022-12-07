@@ -33,7 +33,7 @@ function login() {
         })        // Success
         .fail(function (jqXHR, textStatus, errorThrown) {
             if(jqXHR.status == 401){
-                window.alert("A user with that email/password does not exist.");
+                window.alert("A Patient with that email/password does not exist.");
             } 
         });   // Failure
     }
@@ -47,12 +47,12 @@ function login() {
             dataType: 'json'
         })
         .done(function (data, textStatus, jqXHR) { // Success
-            //console.log(data);
+            window.localStorage.setItem("token",data.token);
             window.location.replace("physician.html");
         })     
         .fail(function (jqXHR, textStatus, errorThrown) {
            if(jqXHR.status == 401){
-            window.alert("A user with that email/password does not exist.");
+            window.alert("A Physician with that email/password does not exist.");
            } 
         });   // Failure
     }

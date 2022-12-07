@@ -1,3 +1,11 @@
+/****   Physician Routes    ****/
+/*
+    This file is going to be managing all POST and GET requests that relate to the patients
+   
+*/
+
+//Declarations
+
 var express = require('express');
 var router = express.Router();
 var Physician = require("../models/physician");
@@ -60,6 +68,7 @@ router.post("/login", function (req, res) {
     });
 });
 
+// Return a list of physicians
 router.get("/list", function(req,res){
     Physician.find(function(err,physicians){
         if (err) {
@@ -72,6 +81,32 @@ router.get("/list", function(req,res){
     });
 });
 
+router.get("/home", function (req, res) {
+    //console.log("recieved"); //TESTING
+    // See if the X-Auth header is set
+    if (!req.headers["x-auth"]) {
+        return res.status(401).json({ success: false, msg: "Missing X-Auth header" });
+    }
+ 
+    // X-Auth should contain the token 
+    const token = req.headers["x-auth"];
+    try {
+        const decoded = jwt.decode(token, secret);
+        // Send back email and last access
+        Physician.findOne({ email: decoded.email  }, function (err, physician) {
+            if (err) {
+                res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
+            }
+            else {
+                //console.log(patient.email);
+                res.status(200).json({ success: true, email: physician.email, patients: physician.patients, message: "success" });
+            }
+        });
+    }
+    catch (ex) {
+        res.status(401).json({ success: false, message: "Invalid JWT" });
+    }
+ });
 
 
 module.exports = router;
