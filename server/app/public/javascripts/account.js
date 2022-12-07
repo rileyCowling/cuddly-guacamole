@@ -33,7 +33,7 @@ $(function(){
         //DOM to display the calculated values
         $("#max").html('Maximum - ' + max + ' bpm');
         $("#min").html('Minimum - ' + min + 'bpm');
-        $("#avg").html('Minimum - ' + avg + 'bpm');
+        $("#avg").html('Average - ' + avg + 'bpm');
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         window.location.replace("login.html");
