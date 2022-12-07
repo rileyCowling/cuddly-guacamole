@@ -35,8 +35,8 @@ router.post("/signUp", function (req, res) {
                 password: passwordHash,  
                 //Creating an ID# for the patient
                 id: uuid.v4(), // ex: "c438f870-f2b7-4b2c-a1c3-83bd88bb1d79"
-                bpm: [87,81,88,87,90,91,91,100,80,87,88,79,90,88,87],
-                oxy: [99,99,99,99,98,98,98,98,98,99,99,99,97,99,99,]
+                bpm: [,,,,87,81,88,87,90,91,91,100,80,87,88,79,90,88,87,,,,,],
+                oxy: [,,,,99,99,99,99,98,98,98,98,98,99,99,99,97,99,99,,,,,]
             });
             //Save the new patient to the database
             newPatient.save(function (err, patient) {
