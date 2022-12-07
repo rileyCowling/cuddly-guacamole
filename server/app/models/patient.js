@@ -6,6 +6,7 @@ const patientSchema = new db.Schema({
     lastName:   String,
     email:      String,
     password:   String,
+    physician:  String,
     bpm:        [Number],
     oxy:        [Number]
 });

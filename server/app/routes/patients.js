@@ -34,7 +34,9 @@ router.post("/signUp", function (req, res) {
                 email: req.body.email,
                 password: passwordHash,  
                 //Creating an ID# for the patient
-                id: uuid.v4() // ex: "c438f870-f2b7-4b2c-a1c3-83bd88bb1d79"
+                id: uuid.v4(), // ex: "c438f870-f2b7-4b2c-a1c3-83bd88bb1d79"
+                bpm: [87,81,88,87,90,91,91,100,80,87,88,79,90,88,87],
+                oxy: [99,99,99,99,98,98,98,98,98,99,99,99,97,99,99,]
             });
             //Save the new patient to the database
             newPatient.save(function (err, patient) {
@@ -117,7 +119,7 @@ router.get("/home", function (req, res) {
             }
             else {
                 console.log(patient.email);
-                res.status(200).json({ success: true, email: patient.email, id: patient.id, message: "success" });
+                res.status(200).json({ success: true, email: patient.email, id: patient.id, bpm: patient.bpm, oxy: patient.oxy, message: "success" });
             }
         });
     }
@@ -152,6 +154,30 @@ router.get("/home", function (req, res) {
     }
  })
  
+ router.post("/selectPhysician", function(req,res){
+    // See if the X-Auth header is set
+    if (!req.headers["x-auth"]) {
+        return res.status(401).json({ success: false, msg: "Missing X-Auth header" });
+    }
+ 
+    // X-Auth should contain the token 
+    const token = req.headers["x-auth"];
+    try {
+        const decoded = jwt.decode(token, secret);
+        // Send back email and last access
+        Patient.findOneAndUpdate({ email: decoded.email  }, {physician: req.body.physician}, function (err, patient) {
+            if (err) {
+                res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
+            }
+            else {
+                res.status(201).json({ success: true, physician: "name" , message: "Physician Selection Success" });
+            }
+        });
+    }
+    catch (ex) {
+        res.status(401).json({ success: false, message: "Invalid JWT" });
+    }
+ })
 
 
 module.exports = router;

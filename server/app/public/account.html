@@ -59,17 +59,7 @@
                             <select for="yourPhysician" id="yourPhysician">
                                 <!--TODO Need to make it default to whichever physician is chosen-->
                                 <option selected=true disabled>No Physician Chosen</option>
-                                <!--Script makes physician select tag have as many options as there are physician accounts-->
-                                <script>
-                                    let numPhysicians = 5;  //replace with physicians length
-                                    let physicianHTML = "";
-                                    //TODO once connected to recorded data
-                                    //replace "Physician ${i}" with physicians[i] email
-                                    for(let i = 0; i < numPhysicians; i++) {
-                                        physicianHTML += `<option value="${i}">Physician ${i}</option>`;
-                                    }
-                                    document.getElementById("yourPhysician").innerHTML += physicianHTML;
-                                </script>
+                                
                             </select>
                         </div>
                     </div>
@@ -188,12 +178,8 @@
                             <canvas id="oxyGraph"></canvas>
                         </div>
                         <!--Script gets data from patient account and displays the corresponding data from the selected day-->
-                        <!--Could not get code to work in separate js file, but works directly in html file-->
                         <script>
-                            
 
-
-                            
                             var bpmChart;
                             var oxyChart;
 
@@ -203,93 +189,106 @@
                                 document.getElementById("day").selectedIndex=0;
                                 document.getElementById("graphContainer").style.display = "none";
                             }
-
-                            //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
-                            function dayChoice(day) {
-                                switch(day) {
-                                    //bpm value, oxy percent; blanks are sleep/no recording
-                                    //TODO replace set values with patient values 
-                                    case "1": var bpm = [, , , , , , , , , , , , , 62, 66, 64, 52, 59, 70, 68, 59, 54, 57, 60]; 
-                                                var oxy = [95, 95, 96, , , , , , , , , , , 98, 99, 97, 98, 99, 100, 100, 97, 97, 98, 99];
-                                                break;
-                                    case "2": var bpm = [55, 54, 100, , , , , , , , , , , , , , 69, 57, 68, 64, 58, 62, 67]; 
-                                                var oxy = [95, 95, 100, , , , , , , , , , , , , , 97, 94, 95, 97, 95, 98, 97];
-                                                break;
-                                    case "3": var bpm = [59, 58, , , , , , , , , , , , , 75, 88, 90, 80, 72, 54, 53, 93, 93, 67]; 
-                                                var oxy = [97, 95, , , , , , , , , , , , , 96, 98, 97, 98, 96, 100, 97, 95, 94, 96];
-                                                break;
-                                    case "4": var bpm = [63, 62, 90, , , , , , , , , , 64, 62, 63, 54, 70, 72, 67, 64, 53, 57, 60, 67]; 
-                                                var oxy = [94, 94, 96, , , , , , , , , , 93, 99, 100, 100, 97, 96, 96, 95, 94, 97, 94, 99];
-                                                break;
-                                    case "5": var bpm = [54, 63, 90, , , , , , , 82, 86, 71, 68, 67, 70, 74, 81, , , , 79, 83, 86, 93]; 
-                                                var oxy = [95, 95, 96, , , , , , , 100, 98, 97, 96, 96, 98, 97, 98, , , , 97, 96, 98, 99];
-                                                break;
-                                    case "6": var bpm = [ , , , , , , , 82, 85, 86, 73, 98, 88, 86, 82, 76, 74, 71, 70, 67, 53, 56, 61, ]; 
-                                                var oxy = [ , , , , , , , 100, 100, 99, 99, 98, 97, 98, 99, 97, 98, 96, 97, 96, 97, 97, 98, ];
-                                                break;
-                                    case "7": var bpm = [ , , , , , , , , 70, 69, 65, 74, 73, 78, 83, 88, 87, 90, 92, 93, 66, 62, , ]; 
-                                                var oxy = [ , , , , , , , , 99, 98, 99, 97, 97, 97, 99, 98, 98, 99, 99, 100, 99, 99, , ];
-                                                break;
-                                    default: var bpm = 0; oxy = 0; break;
-                                }
-                                return [bpm, oxy];
-                            }
+                            /*
+                            // //Chooses the data for a given day (from dropdown) Assuming bpm and oxy saturation formated like this
+                            // function dayChoice(day) {
+                            //     switch(day) {
+                            //         //bpm value, oxy percent; blanks are sleep/no recording
+                            //         //TODO replace set values with patient values 
+                            //         case "1": var bpm = [, , , , , , , , , , , , , 62, 66, 64, 52, 59, 70, 68, 59, 54, 57, 60]; 
+                            //                     var oxy = [95, 95, 96, , , , , , , , , , , 98, 99, 97, 98, 99, 100, 100, 97, 97, 98, 99];
+                            //                     break;
+                            //         case "2": var bpm = [55, 54, 100, , , , , , , , , , , , , , 69, 57, 68, 64, 58, 62, 67]; 
+                            //                     var oxy = [95, 95, 100, , , , , , , , , , , , , , 97, 94, 95, 97, 95, 98, 97];
+                            //                     break;
+                            //         case "3": var bpm = [59, 58, , , , , , , , , , , , , 75, 88, 90, 80, 72, 54, 53, 93, 93, 67]; 
+                            //                     var oxy = [97, 95, , , , , , , , , , , , , 96, 98, 97, 98, 96, 100, 97, 95, 94, 96];
+                            //                     break;
+                            //         case "4": var bpm = [63, 62, 90, , , , , , , , , , 64, 62, 63, 54, 70, 72, 67, 64, 53, 57, 60, 67]; 
+                            //                     var oxy = [94, 94, 96, , , , , , , , , , 93, 99, 100, 100, 97, 96, 96, 95, 94, 97, 94, 99];
+                            //                     break;
+                            //         case "5": var bpm = [54, 63, 90, , , , , , , 82, 86, 71, 68, 67, 70, 74, 81, , , , 79, 83, 86, 93]; 
+                            //                     var oxy = [95, 95, 96, , , , , , , 100, 98, 97, 96, 96, 98, 97, 98, , , , 97, 96, 98, 99];
+                            //                     break;
+                            //         case "6": var bpm = [ , , , , , , , 82, 85, 86, 73, 98, 88, 86, 82, 76, 74, 71, 70, 67, 53, 56, 61, ]; 
+                            //                     var oxy = [ , , , , , , , 100, 100, 99, 99, 98, 97, 98, 99, 97, 98, 96, 97, 96, 97, 97, 98, ];
+                            //                     break;
+                            //         case "7": var bpm = [ , , , , , , , , 70, 69, 65, 74, 73, 78, 83, 88, 87, 90, 92, 93, 66, 62, , ]; 
+                            //                     var oxy = [ , , , , , , , , 99, 98, 99, 97, 97, 97, 99, 98, 98, 99, 99, 100, 99, 99, , ];
+                            //                     break;
+                            //         default: var bpm = 0; oxy = 0; break;
+                            //     }
+                            //     return [bpm, oxy];
+                            // }
+                            */
                             //displays daily view graph for a given day (from dropdown)
                             function displayGraph(day) {
 
-                                let [bpm, oxy] = dayChoice(day);
-                                //Shouldnt happen but just incase
-                                if(bpm == 0) {
-                                    console.log("no choice yet");
-                                    return;
-                                }
+                                $.ajax({
+                                    url: '/patients/home',
+                                    method: 'GET',
+                                    headers: { 'x-auth' : window.localStorage.getItem("token") },
+                                    //body: {'id': 'd2096866-acca-4be1-a201-ac79bdb773d5'},
+                                    dataType: 'json'
+                                })
+                                .done(function (data, textStatus, jqXHR) {
+                                    //window.alert(data.bpm);
+                                    //Shouldnt happen but just incase
+                                    if(data.bpm == 0) {
+                                        console.log("no choice yet");
+                                        return;
+                                    }
 
-                                //Make chart area visible and code needed for Chart.js to function
-                                document.getElementById("graphContainer").style.display = "block";
-                                //bpm chart
-                                const ctx1 = document.getElementById('bpmGraph');
-                                bpmChart = new Chart(ctx1, {
-                                    type: 'line',
-                                    data: {
-                                        //can be replaced with times/values from board
-                                        labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
-                                        datasets: [{
-                                            label: 'Heart Rate',
-                                            data: bpm,
-                                            borderWidth: 1
-                                        }]
-                                    },
-                                    options: {
-                                        maintainAspectRatio: false,
-                                        scales: {
-                                            y: {
-                                                beginAtZero: false
+                                    //Make chart area visible and code needed for Chart.js to function
+                                    document.getElementById("graphContainer").style.display = "block";
+                                    //bpm chart
+                                    const ctx1 = document.getElementById('bpmGraph');
+                                    bpmChart = new Chart(ctx1, {
+                                        type: 'line',
+                                        data: {
+                                            //can be replaced with times/values from board
+                                            labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
+                                            datasets: [{
+                                                label: 'Heart Rate',
+                                                data: data.bpm,
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            maintainAspectRatio: false,
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: false
+                                                }
                                             }
                                         }
-                                    }
-                                });
-                                //oxy chart
-                                const ctx2 = document.getElementById('oxyGraph');
-                                oxyChart = new Chart(ctx2, {
-                                    type: 'line',
-                                    data: {
-                                        //can be replaced with times/values from board
-                                        labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
-                                        datasets: [{
-                                            label: 'Oxygen Saturation',
-                                            data: oxy,
-                                            borderWidth: 1
-                                        }]
-                                    },
-                                    options: {
-                                        maintainAspectRatio: false,
-                                        scales: {
-                                            y: {
-                                                beginAtZero: false
+                                    });
+                                    //oxy chart
+                                    const ctx2 = document.getElementById('oxyGraph');
+                                    oxyChart = new Chart(ctx2, {
+                                        type: 'line',
+                                        data: {
+                                            //can be replaced with times/values from board
+                                            labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'],
+                                            datasets: [{
+                                                label: 'Oxygen Saturation',
+                                                data: data.oxy,
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            maintainAspectRatio: false,
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: false
+                                                }
                                             }
                                         }
-                                    }
-                                });
+                                    });
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                        window.location.replace("login.html");
+                                })
                             }
                         </script>
                     </div>
