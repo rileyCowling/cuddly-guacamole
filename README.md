@@ -22,3 +22,13 @@ the one inside of server talks about getting ec2 going on your computer
 Inside of Firmware is where we have the files relating the the particle photon device.
 
 Inside of Server is where we have all of the files relating to the EC2 instance along with files relating to the node.js and express.js server/application along with all of our web resources that are employed by the application. 
+
+
+## Remove above and other README files when turning in ##
+
+Link to server: 
+Link to pitch: 
+Link to project video: 
+
+Login Credentials for Patient: 
+Login Credentials for Physician: 
