@@ -126,7 +126,31 @@ router.get("/home", function (req, res) {
     }
  });
 
+ router.post("/passwordChange", function(req,res){
+    // See if the X-Auth header is set
+    if (!req.headers["x-auth"]) {
+        return res.status(401).json({ success: false, msg: "Missing X-Auth header" });
+    }
  
+    // X-Auth should contain the token 
+    const token = req.headers["x-auth"];
+    try {
+        const decoded = jwt.decode(token, secret);
+        const passwordHash = bcrypt.hashSync(req.body.password, 10);
+        // Send back email and last access
+        Patient.findOneAndUpdate({ email: decoded.email  }, {password: passwordHash}, function (err, patient) {
+            if (err) {
+                res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
+            }
+            else {
+                res.status(201).json({ success: true, message: "password change success" });
+            }
+        });
+    }
+    catch (ex) {
+        res.status(401).json({ success: false, message: "Invalid JWT" });
+    }
+ })
  
 
 
