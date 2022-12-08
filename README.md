@@ -5,10 +5,13 @@ ECE 513 IOT group project. Uses a Particle Photon IOT microcontroller and the MA
 ## LINKS & Important INFO ##
 
 Link to server: https://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000/index.html
+
 Link to pitch: https://youtu.be/TdQyBunSb_0
+
 Link to project video: https://youtube.com/playlist?list=PLqu2Z1-kOANMk8LBFq06qJZPbs_TBgQzE
 
 Login Credentials for Patient: patient@email.com, Patient1!!
+
 Login Credentials for Physician: physician@email.com, Physician1!!
 
 
