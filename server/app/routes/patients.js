@@ -264,6 +264,7 @@ router.get("/home", function (req, res) {
     console.log("ID: " + req.body.id + " Token:" + req.body.token )
     let ID = req.body.id;
     let token=req.body.token;
+    let cmd = "on"
     particle.callFunction({ID, name:'led', argument: cmd, auth:token})
 
  })
