@@ -96,7 +96,7 @@ $(function(){
     
     //**** Taking care of the log out process
     $("#logoutButton").click(function(){
-        window.localStorage.removeItem("token");
+        window.localStorage.clear();
         window.location.replace("index.html");
     });
 
@@ -154,11 +154,70 @@ $(function(){
     
 
     //**** Device Registration & Removal (IDK if removal will be implemented)
+    $("#particleButton").click(function(){
+       
+        let token= $('#particleToken').val();
+        let id= $('#particleID').val();
+        // //window.alert("ID :" + id );
+        // let txdata = {
+        //     particleToken: $('#particleToken').val(),
+        //     particleID: $('#particleID').val()
+        // };
+    
+        // //Determine where to send the data based on drop down menu response
 
+        // // AJAX POST Request for patient route
+        // $.ajax({
+        //     url: '/patients/particle',
+        //     headers: { 'x-auth' : window.localStorage.getItem("token") },
+        //     method: 'POST',
+        //     contentType: 'application/json',
+        //     data: JSON.stringify(txdata),
+        //     dataType: 'json'
+        // })
+        // .done(function (data, textStatus, jqXHR) {// Success
+        //     window.alert(data.message);
+        // })        
+        // .fail(function (jqXHR, textStatus, errorThrown) {// Failure
+            
+        // });   
+        window.localStorage.setItem("particleToken", token);
+        window.localStorage.setItem("particleID", id); 
+        window.alert("Token and ID were stored successfully into local storage  Device ID: " + localStorage.getItem("particleID"));
+
+    })
 
 
     //**** Time of Day and Frequency 
-   
+    $("#saveChanges").click(function(){
+        //window.alert("got it");
+        let txdata = {
+            id: window.localStorage.getItem("particleID"),
+            token: window.localStorage.getItem("particleToken"),
+            frequency: $('#frequency').val(),
+            start: $('#startTime').val(),
+            end: $('#endTime').val()
+        };
+    
+        //Determine where to send the data based on drop down menu response
+
+        // AJAX POST Request for patient route
+        $.ajax({
+            url: '/patients/particleUpdate',
+            headers: { 'x-auth' : window.localStorage.getItem("token") },
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(txdata),
+            dataType: 'json'
+        })
+        .done(function (data, textStatus, jqXHR) {// Success
+            window.alert(data.message);
+        })        
+        .fail(function (jqXHR, textStatus, errorThrown) {// Failure
+            
+        });   
+
+    })
 
 
 

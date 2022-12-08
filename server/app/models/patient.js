@@ -7,6 +7,8 @@ const patientSchema = new db.Schema({
     email:      String,
     password:   String,
     physician:  String,
+    particleToken:  String,
+    particleID: String,
     bpm:        [Number],
     oxy:        [Number]
 });
