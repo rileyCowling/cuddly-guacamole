@@ -30,14 +30,16 @@ $(function(){
                min = data.bpm[i];
             }
         }
-        let avg, sum, num = 0;
+        let avg = 0;
+        let sum = 0;
+        let num = 0;
         for (let i=0;i<data.bpm.length;i++){
             if(data.bpm[i] == null) {
                 //skip
             }
             else {
                 sum += data.bpm[i];
-                num += 1;
+                num++;
             }
         }
         avg = sum / num;
