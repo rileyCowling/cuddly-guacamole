@@ -87,8 +87,8 @@ router.post("/login", function (req, res) {
 
 
 router.post("/dataEntry", function (req, res) {
-    console.log(req.json.id);
-    Patient.findOne({ id: req.body.id }, function (err, patient) {
+    const dataObj = JSON.parse(req.body.data);
+    Patient.findOne({ id: dataObj.id }, function (err, patient) {
         if (err) {
             res.status(400).send(err);
         }
@@ -99,7 +99,7 @@ router.post("/dataEntry", function (req, res) {
             console.log(msgStr);
         }
         else {
-            const dataObj = JSON.parse(req.body.data);
+            
             //save the data to the patient's arrays
             patient.bpm.push(dataObj.heartRate);
             patient.oxy.push(dataObj.spo2);
