@@ -87,7 +87,8 @@ router.post("/login", function (req, res) {
 
 
 router.post("/dataEntry", function (req, res) {
-    Patient.findOne({ id: req.body.id }, function (err, patient) {
+    const dataObj = JSON.parse(req.body.data);
+    Patient.findOne({ id: dataObj.id }, function (err, patient) {
         if (err) {
             res.status(400).send(err);
         }
@@ -98,7 +99,7 @@ router.post("/dataEntry", function (req, res) {
             console.log(msgStr);
         }
         else {
-            const dataObj = JSON.parse(req.body.data);
+            
             //save the data to the patient's arrays
             patient.bpm.push(dataObj.heartRate);
             patient.oxy.push(dataObj.spo2);
@@ -265,12 +266,35 @@ router.get("/home", function (req, res) {
     let ID = req.body.id;
     let token=req.body.token;
     let cmd = "on";
-    particle.callFunction({deviceIf: ID, name:'led', argument: cmd, auth:token}).then(
-        function(data) {
-          console.log('Function called succesfully:', data);
-        }, function(err) {
-          console.log('An error occurred:', err);
-        });
+
+    var url = "https://api.spark.io/v1/devices/" + ID + "/led";
+
+    function switchOn()
+    {
+        $.post(url, {params: "on", access_token: token });
+    }  
+
+    function switchOff()
+    {
+        $.post(url, {params: "off", access_token: token });
+    }  
+
+    // particle.callFunction({deviceIf: ID, name:'led', argument: cmd, auth:token}).then(
+    //     function(data) {
+    //       console.log('Function called succesfully:', data);
+    //     }, function(err) {
+    //       console.log('An error occurred:', err);
+    //     });
+    // var devicesPr = particle.listDevices({ auth: token });
+
+    // devicesPr.then(
+    // function(devices){
+    //     console.log('Devices: ', devices);
+    // },
+    // function(err) {
+    //     console.log('List devices call failed: ', err);
+    // }
+    // );
 
  })
 
