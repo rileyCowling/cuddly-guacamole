@@ -22,6 +22,7 @@ const fs = require('fs');
 const uuid = require('uuid');
 const { json } = require('express');
 const Physician = require('../models/physician');
+const { compileClientWithDependenciesTracked } = require('jade');
 const secret = fs.readFileSync(__dirname + '/../keys/jwtkey').toString();
 
 //SIGN UP A NEW PATIENT
@@ -221,10 +222,43 @@ router.get("/home", function (req, res) {
             }
             else {
                 //console.log(patient.email);
+                
                 res.status(200).json({ success: true, patientObj: patient, message: "success" });
             }
         });
     
  });
+
+
+ router.post("/particle", function(req,res){
+    if (!req.headers["x-auth"]) {
+        return res.status(401).json({ success: false, msg: "Missing X-Auth header" });
+    }
+ 
+    // X-Auth should contain the token 
+    const token = req.headers["x-auth"];
+    try {
+        const decoded = jwt.decode(token, secret);
+        let filter = { email: decoded.email  };
+        let update = { particleToken: req.body.particleToken  };
+        Patient.findOneAndUpdate(filter, update, function (err) {
+            if (err) {
+                res.status(400).json({ success: false, message: "Error contacting DB. Please contact support." });
+            }
+            else {
+                res.status(201).json({ success: true, message: "Particle Info Saved" });
+            }
+        });
+    }
+    catch (ex) {
+        res.status(401).json({ success: false, message: "Invalid JWT" });
+    }
+ })
+
+ //for sending a command to the particle device
+ router.post("/particleUpdate", function(req,res){
+    //We have the token and ID along with the start & end times, and frequencies
+    console.log("ID: " + req.body.id + " Token:" + req.body.token )
+ })
 
 module.exports = router;
