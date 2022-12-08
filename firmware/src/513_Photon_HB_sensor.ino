@@ -47,7 +47,7 @@ void setup()
   pinMode(G_LED,OUTPUT);
   pinMode(B_LED,OUTPUT);
   pinMode(W_LED,OUTPUT);
-
+  
   // Initialize sensor, if something is wrong go into the following infinite loop
   if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
   {
@@ -155,6 +155,7 @@ void loop(){
   digitalWrite(W_LED,HIGH);
   delay(200);
   digitalWrite(W_LED,LOW);
+}
 
 }
 
