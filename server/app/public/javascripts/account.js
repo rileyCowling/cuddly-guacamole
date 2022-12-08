@@ -37,10 +37,9 @@ $(function(){
             }
             else {
                 sum += data.bpm[i];
-                num++;
+                num += 1;
             }
         }
-        console.log(sum + " ," + num + " ," + avg);
         avg = sum / num;
         //DOM to display the calculated values
         $("#max").html('Maximum - ' + max + ' bpm');
