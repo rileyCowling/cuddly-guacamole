@@ -10,24 +10,24 @@ function signup() {
         return;
     }
 
-    // // Valid Email Address 
-    // var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}$/;
-    // if($('#email').val().match(email)) { 
-    //     // All good
-    // }
-    // else{ 
-    //     alert('Email is invalid');
-    //     return false;
-    // }
-    // // Strong Password 
-    // var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-    // if($('#password').val().match(password)) { 
-    //     // All good
-    // }
-    // else{ 
-    //     alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
-    //     return false;
-    // }
+    // Valid Email Address 
+    var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}$/;
+    if($('#email').val().match(email)) { 
+        // All good
+    }
+    else{ 
+        alert('Email is invalid');
+        return false;
+    }
+    // Strong Password 
+    var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+    if($('#password').val().match(password)) { 
+        // All good
+    }
+    else{ 
+        alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
+        return false;
+    }
     
 
     // Save the Email and Password in the Variable txdata for easy manipulation
