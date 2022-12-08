@@ -58,17 +58,15 @@ $(function(){
     //**** Taking care of Change Password Button
     $("#newPasswordButton").click(function(){
         
-        //** Uncomment Below!!! **//
-
-        // // Strong Password Check
-        // var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-        // if($('#newPassword').val().match(password)) { 
-        //     // All good
-        // }
-        // else{ 
-        //     alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
-        //     return false;
-        // }
+        // Strong Password Check
+        var password = /(?=^.{10,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+        if($('#newPassword').val().match(password)) { 
+            // All good
+        }
+        else{ 
+            alert('Password is invalid. Must contain at least 10 characters including at least one numeric digit, one symbol, one uppercase and one lowercase letter');
+            return false;
+        }
         
         //Create data from text input
         let txdata = {
