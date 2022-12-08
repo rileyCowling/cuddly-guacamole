@@ -24,6 +24,9 @@ const { json } = require('express');
 const Physician = require('../models/physician');
 const { compileClientWithDependenciesTracked } = require('jade');
 const secret = fs.readFileSync(__dirname + '/../keys/jwtkey').toString();
+var Particle = require('particle-api-js');
+var particle = new Particle();
+
 
 //SIGN UP A NEW PATIENT
 router.post("/signUp", function (req, res) {
@@ -259,6 +262,16 @@ router.get("/home", function (req, res) {
  router.post("/particleUpdate", function(req,res){
     //We have the token and ID along with the start & end times, and frequencies
     console.log("ID: " + req.body.id + " Token:" + req.body.token )
+    let ID = req.body.id;
+    let token=req.body.token;
+    let cmd = "on";
+    particle.callFunction({deviceIf: ID, name:'led', argument: cmd, auth:token}).then(
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+        });
+
  })
 
 module.exports = router;
