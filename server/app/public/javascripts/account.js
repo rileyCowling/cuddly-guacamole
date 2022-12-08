@@ -45,8 +45,8 @@ $(function(){
         avg = sum / num;
         //DOM to display the calculated values
         $("#max").html('Maximum - ' + max + ' bpm');
-        $("#min").html('Minimum - ' + min + 'bpm');
-        $("#avg").html('Average - ' + avg + 'bpm');
+        $("#min").html('Minimum - ' + min + ' bpm');
+        $("#avg").html('Average - ' + avg + ' bpm');
         if(data.physician != null){
             $("#default").html("Physician " + data.physician);
         }
