@@ -52,7 +52,6 @@
                                             <!--Dynamic dropdown that has as many rows as the physician has patients-->
                                             <script>
                                                
-                                                $(function(){
                                                     $.ajax({
                                                         url: '/physicians/home',
                                                         method: 'GET',
@@ -120,7 +119,7 @@
                                                         }
                                                         document.getElementById('tableBody').innerHTML = tableHTML;
                                                     })
-                                                });
+                                                
                                             </script>
                                             <!--Dynamic dropdown end-->
                                             

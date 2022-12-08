@@ -3,15 +3,15 @@
 
     
 
-var bpmChart;
-var oxyChart;
+// var bpmChart;
+// var oxyChart;
 
-document.getElementById("resetGraph").onclick = function() {
-    bpmChart.destroy();
-    oxyChart.destroy();
-    document.getElementById("day").selectedIndex=0;
-    document.getElementById("graphContainer").style.display = "none";
-}
+// document.getElementById("resetGraph").onclick = function() {
+//     bpmChart.destroy();
+//     oxyChart.destroy();
+//     document.getElementById("day").selectedIndex=0;
+//     document.getElementById("graphContainer").style.display = "none";
+// }
 
 
 //**** Taking care of the log out process
