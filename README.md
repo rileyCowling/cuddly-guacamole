@@ -16,7 +16,7 @@ Login Credentials for Physician: physician@email.com, Physician1!!
 
 
 
-Overview of Project
+## Overview of Project ##
 - ECE 513 IOT group project. Uses a Particle Photon IOT microcontroller and the MAX30102 heart beat and blood oxygen sensor.
 - Collects data from the sensor, uploads it to a database and is displayable in the corresponding account using Chart.js
 
