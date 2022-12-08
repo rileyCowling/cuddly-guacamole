@@ -7,7 +7,9 @@
 //Express Generated
 var createError = require('http-errors');
 var express = require('express');
+const https = require('https'); //add https dependency
 var path = require('path');
+const fs = require('fs'); //add fs to read files
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require('body-parser');     // Parses JSON in body
@@ -76,7 +78,14 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(3000); // Port 3000
+//app.listen(3000); // Port 3000
+const sslServer = https.createServer({ //create http server
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')), //find certificate key
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem')) //find certificate
+}, app)
+
+sslServer.listen(3000, () => console.log('Secure server')); //start listening
+
 module.exports = app;
 
 // Welcome message displayed on console
