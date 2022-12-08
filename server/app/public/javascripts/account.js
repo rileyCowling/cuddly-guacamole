@@ -23,15 +23,24 @@ $(function(){
         }
         let min = max;
         for (let i=0;i<data.bpm.length;i++){
-            if(data.bpm[i]<=min){
+            if(data.bpm[i] == null) {
+                //skip
+            }
+            else if(data.bpm[i]<=min){
                min = data.bpm[i];
             }
         }
-        let avg, sum = 0;
+        let avg, sum, num = 0;
         for (let i=0;i<data.bpm.length;i++){
-            sum += data.bpm[i];
+            if(data.bpm[i] == null) {
+                //skip
+            }
+            else {
+                sum += data.bpm[i];
+                num++;
+            }
         }
-        avg = sum / data.bpm.length;
+        avg = sum / num;
         //DOM to display the calculated values
         $("#max").html('Maximum - ' + max + ' bpm');
         $("#min").html('Minimum - ' + min + 'bpm');
