@@ -5,17 +5,6 @@ ECE 513 IOT group project. Uses a Particle Photon IOT microcontroller and the MA
 Use the README's to in the different folders if you don't know what to do.
 the one inside of server talks about getting ec2 going on your computer
 
-## TO-DO ##
-# Website/application
-    -set up routes 
-    -need a place for webhooks to go
-    -then graphically display the data 
-
-# Particle
-    -set up webhooks
-    -adapt the code to have different states - use some variable i guess that can be adjusted by user. 
-
-
 
 ## Structure ##
 
