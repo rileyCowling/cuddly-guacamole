@@ -265,7 +265,11 @@ router.get("/home", function (req, res) {
     let ID = req.body.id;
     let token=req.body.token;
     let cmd = "on"
-    particle.callFunction({ID, name:'led', argument: cmd, auth:token})
+    particle.callFunction({ID, name:'led', argument: cmd, auth:token}).then((response) => {
+        // process the response if server returns HTTP 200-299
+      }).catch((error) => {
+        // error handling, use error.response to access the non 2xx response
+      });
 
  })
 
