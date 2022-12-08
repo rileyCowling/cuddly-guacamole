@@ -1,26 +1,15 @@
 # cuddly-guacamole
 ECE 513 IOT group project. Uses a Particle Photon IOT microcontroller and the MAX30102 heart beat and blood oxygen sensor.
 
-## Important ##
-Use the README's to in the different folders if you don't know what to do.
-the one inside of server talks about getting ec2 going on your computer
 
+## LINKS & Important INFO ##
 
-## Structure ##
+Link to server: https://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000/index.html
+Link to pitch: https://youtu.be/TdQyBunSb_0
+Link to project video: https://youtube.com/playlist?list=PLqu2Z1-kOANMk8LBFq06qJZPbs_TBgQzE
 
-Inside of Firmware is where we have the files relating the the particle photon device.
-
-Inside of Server is where we have all of the files relating to the EC2 instance along with files relating to the node.js and express.js server/application along with all of our web resources that are employed by the application. 
-
-
-## Remove above and other README files before turning in ##
-
-Link to server: 
-Link to pitch: 
-Link to project video: 
-
-Login Credentials for Patient: 
-Login Credentials for Physician: 
+Login Credentials for Patient: patient@email.com, Patient1!!
+Login Credentials for Physician: physician@email.com, Physician1!!
 
 
 
@@ -33,8 +22,31 @@ Group Members
 - Ryan Stancliffe
 - Brad Zimmermann
 
-How to run the project
-- 
+## How to run the project ##
+/////////////////////////////////////////////// Loggin into EC2 Instance from Terminal ///////////////////////////////////////////////
+
+//Run the following commands to log onto our EC2 instance //copy/download key to your computer and make sure you are located in the right directory
+
+$ chmod 400 513_project_key.pem
+
+$ ssh -i "513_project_key.pem" ec2-user@ec2-13-57-240-26.us-west-1.compute.amazonaws.com
+
+//Navigate to application and run app
+
+$ cd cuddly-guacamole/server/app/
+
+$ node app.js
+
+//Visit the app by going to IP or DNS at port 3000
+
+//Non-HTTPS links
+
+http://13.57.240.26:3000
+
+or
+
+http://ec2-13-57-240-26.us-west-1.compute.amazonaws.com:3000
+
 
 Structure
 - firmware  - all files relating to the particle photon device
@@ -55,8 +67,7 @@ Brief description of each (non css, non self explanatory) file
     - script.js     - A simple scroll function used to fade the navigation bar in or out when the window is moved 40px from the top of the page.
     - signup.js     - Various checks that need to be made when the signup button is clicked. This includes checking that the email and password fields are not empty, checking that the email address is valid, checking that the password is ‘Strong’, checking that the entered email does not already have an account, and finally making a new patient or physician account using the entered information via POST requests.
 - routes
-    - index         - 
-    - patients      - 
-    - physicians    - 
-    - users         - 
+    - patients: Patients handles all requests that involve querying the patient database.
+    - physicians: physicians handls all requests that involve the physician database, substantially less than patients.
+ 
 
