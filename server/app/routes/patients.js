@@ -265,12 +265,22 @@ router.get("/home", function (req, res) {
     let ID = req.body.id;
     let token=req.body.token;
     let cmd = "on";
-    particle.callFunction({deviceIf: ID, name:'led', argument: cmd, auth:token}).then(
-        function(data) {
-          console.log('Function called succesfully:', data);
-        }, function(err) {
-          console.log('An error occurred:', err);
-        });
+    // particle.callFunction({deviceIf: ID, name:'led', argument: cmd, auth:token}).then(
+    //     function(data) {
+    //       console.log('Function called succesfully:', data);
+    //     }, function(err) {
+    //       console.log('An error occurred:', err);
+    //     });
+    var devicesPr = particle.listDevices({ auth: token });
+
+    devicesPr.then(
+    function(devices){
+        console.log('Devices: ', devices);
+    },
+    function(err) {
+        console.log('List devices call failed: ', err);
+    }
+    );
 
  })
 
