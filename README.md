@@ -44,6 +44,9 @@ Group Members
 - Ryan Stancliffe
 - Brad Zimmermann
 
+How to run the project
+- 
+
 Structure
 - firmware  - all files relating to the particle photon device
 - server    - all files relating to the EC2 instance, node.js, and express.js server
